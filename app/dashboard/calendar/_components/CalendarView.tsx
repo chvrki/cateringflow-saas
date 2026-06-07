@@ -255,10 +255,10 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
                 setActiveView(view)
               }}
               className={cn(
-                'rounded-lg px-4 py-2 text-[15px] font-medium transition-colors',
+                'rounded-lg px-4 py-2 text-[15px] font-medium transition-colors duration-150 active:scale-[0.97]',
                 activeView === view
                   ? 'bg-[#0F766E] text-white hover:bg-[#115E59]'
-                  : 'border border-[#E5E7EB] bg-white text-[#6B7280] hover:bg-[#F8FAFC]',
+                  : 'border border-[#E5E7EB] bg-white text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB]',
               )}
             >
               {label}
@@ -280,22 +280,22 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
           <div className="flex items-center justify-center gap-2 flex-1 order-first sm:order-none">
             <button
               type="button"
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
               onClick={() => api()?.prev()}
               aria-label="Mes anterior"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-4 w-4" strokeWidth={1.5} />
             </button>
             <h2 className="font-heading text-[17px] font-semibold text-[#111827] min-w-[12rem] text-center capitalize">
               {calendarTitle || '…'}
             </h2>
             <button
               type="button"
-              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+              className="w-9 h-9 flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
               onClick={() => api()?.next()}
               aria-label="Mes siguiente"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-4 w-4" strokeWidth={1.5} />
             </button>
           </div>
           <div className="hidden sm:block w-[72px] shrink-0" aria-hidden />
@@ -348,22 +348,22 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white border border-[#E5E7EB] rounded-xl px-5 py-3 flex items-center gap-3">
-          <Calendar className="h-5 w-5 text-[#0F766E] shrink-0" />
+        <div className="bg-white border border-[#E5E7EB] rounded-xl px-5 py-3 flex items-center gap-3 transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]">
+          <Calendar className="h-5 w-5 text-[#0F766E] shrink-0" strokeWidth={1.5} />
           <p className="text-[15px] font-medium text-[#6B7280]">
             <span className="font-semibold text-[#111827] tabular-nums">{monthStats.total}</span> eventos
             este mes
           </p>
         </div>
-        <div className="bg-white border border-[#E5E7EB] rounded-xl px-5 py-3 flex items-center gap-3">
-          <CheckCircle className="h-5 w-5 text-[#16A34A] shrink-0" />
+        <div className="bg-white border border-[#E5E7EB] rounded-xl px-5 py-3 flex items-center gap-3 transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]">
+          <CheckCircle className="h-5 w-5 text-[#16A34A] shrink-0" strokeWidth={1.5} />
           <p className="text-[15px] font-medium text-[#6B7280]">
             <span className="font-semibold text-[#111827] tabular-nums">{monthStats.confirmed}</span>{' '}
             confirmados
           </p>
         </div>
-        <div className="bg-white border border-[#E5E7EB] rounded-xl px-5 py-3 flex items-center gap-3">
-          <Clock className="h-5 w-5 text-[#D97706] shrink-0" />
+        <div className="bg-white border border-[#E5E7EB] rounded-xl px-5 py-3 flex items-center gap-3 transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]">
+          <Clock className="h-5 w-5 text-[#D97706] shrink-0" strokeWidth={1.5} />
           <p className="text-[15px] font-medium text-[#6B7280]">
             <span className="font-semibold text-[#111827] tabular-nums">{monthStats.pending}</span>{' '}
             pendientes
@@ -419,7 +419,7 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
                   <div className="flex items-center justify-between gap-2 mt-2">
                     <button
                       type="button"
-                      className="text-[13px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
+                      className="text-[13px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors duration-150"
                       onClick={() => {
                         setSelectedBooking(b)
                         setIsModalOpen(true)
@@ -455,7 +455,7 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
                 <div className="bg-[#F8FAFC] border border-[#E5E7EB] rounded-xl p-4 grid grid-cols-2 gap-y-4 gap-x-2">
                   <div>
                     <div className="flex items-center gap-1.5 text-[#9CA3AF] mb-1.5">
-                      <User className="w-3.5 h-3.5" />
+                      <User className="w-3.5 h-3.5" strokeWidth={1.5} />
                       <span className="text-[11px] uppercase font-semibold tracking-widest">
                         Cliente
                       </span>
@@ -474,7 +474,7 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5 text-[#9CA3AF] mb-1.5">
-                      <Calendar className="w-3.5 h-3.5" />
+                      <Calendar className="w-3.5 h-3.5" strokeWidth={1.5} />
                       <span className="text-[11px] uppercase font-semibold tracking-widest">
                         Detalles
                       </span>
@@ -521,7 +521,7 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
                 {selectedBooking.notes && (
                   <div className="bg-[#FEF3C7] border-l-4 border-[#D97706] p-3 rounded-r-lg">
                     <div className="flex items-center gap-1.5 text-[#6B7280] mb-1">
-                      <AlignLeft className="w-3.5 h-3.5" />
+                      <AlignLeft className="w-3.5 h-3.5" strokeWidth={1.5} />
                       <span className="text-[11px] font-semibold uppercase tracking-widest">
                         Notas cliente
                       </span>
@@ -562,7 +562,7 @@ export function CalendarView({ initialBookings }: { initialBookings: Booking[] }
                 onClick={handleDownloadPDF}
                 disabled={isUpdating}
               >
-                <Download className="w-4 h-4 mr-2" />
+                <Download className="w-4 h-4 mr-2" strokeWidth={1.5} />
                 Factura proforma (PDF)
               </Button>
             )}

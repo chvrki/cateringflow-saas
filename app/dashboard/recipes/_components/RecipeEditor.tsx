@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import {
   ArrowLeft,
+  ArrowRight,
   Plus,
   Trash2,
   Loader2,
@@ -250,9 +251,9 @@ export function RecipeEditor({
         {/* Back */}
         <Link
           href="/dashboard/recipes"
-          className="inline-flex items-center text-[15px] text-[#6B7280] hover:text-[#111827] transition-colors"
+          className="group inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors duration-150"
         >
-          <ArrowLeft className="h-4 w-4 mr-1" />
+          <ArrowLeft className="h-4 w-4 transition-transform duration-150 ease-out group-hover:-translate-x-0.5" strokeWidth={1.5} />
           Escandallos
         </Link>
 
@@ -268,7 +269,7 @@ export function RecipeEditor({
                 {name || (mode === 'new' ? 'Nueva receta' : 'Receta')}
               </span>
             </nav>
-            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
               {mode === 'new' ? 'Nueva receta' : (name || 'Editar receta')}
             </h1>
           </div>
@@ -278,25 +279,25 @@ export function RecipeEditor({
                 type="button"
                 onClick={handleDelete}
                 disabled={isPending || isDeleting}
-                className="inline-flex items-center gap-2 rounded-lg border border-[#DC2626]/20 bg-white px-4 py-2 text-[15px] font-medium text-[#DC2626] hover:bg-[#FEE2E2] disabled:opacity-50 transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#DC2626]/20 bg-white px-4 py-2 text-[14px] font-medium text-[#DC2626] hover:bg-[#FEE2E2] disabled:opacity-50 transition-colors duration-150 active:scale-[0.97] disabled:active:scale-100"
               >
-                {isDeleting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+                {isDeleting ? <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} /> : <Trash2 className="h-4 w-4" strokeWidth={1.5} />}
                 Eliminar
               </button>
             )}
             <Link
               href="/dashboard/recipes"
-              className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+              className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
             >
               Cancelar
             </Link>
             <button
               onClick={handleSave}
               disabled={isPending}
-              className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50 transition-colors"
+              className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50 transition-colors duration-150 active:scale-[0.97] disabled:active:scale-100"
             >
               {isPending ? (
-                <><Loader2 className="h-4 w-4 animate-spin mr-2" />Guardando…</>
+                <><Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />Guardando…</>
               ) : (
                 mode === 'new' ? 'Crear receta' : 'Guardar cambios'
               )}
@@ -420,9 +421,9 @@ export function RecipeEditor({
                           onClick={() =>
                             setIngRows((prev) => prev.filter((r) => r._key !== row._key))
                           }
-                          className="flex items-center justify-center rounded-lg p-1 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors"
+                          className="flex items-center justify-center rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.94]"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                         </button>
                       </div>
                     )
@@ -438,15 +439,15 @@ export function RecipeEditor({
                   value={ingSearch}
                   onChange={(e) => setIngSearch(e.target.value)}
                 />
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF] pointer-events-none" strokeWidth={1.5} />
                 {ingSearch && filteredIngredients.length > 0 && (
-                  <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                  <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-[0_8px_24px_rgba(15,23,42,0.08)] max-h-48 overflow-y-auto">
                     {filteredIngredients.slice(0, 15).map((ing) => (
                       <button
                         key={ing.id}
                         type="button"
                         onClick={() => addIngredientRow(ing)}
-                        className="w-full flex items-center justify-between px-4 py-2 text-[15px] text-[#111827] hover:bg-[#F8FAFC] transition-colors text-left"
+                        className="w-full flex items-center justify-between px-4 py-2 text-[14px] text-[#111827] hover:bg-[#F8FAFC] transition-colors duration-150 text-left"
                       >
                         <span>{ing.name}</span>
                         <span className="text-xs text-[#9CA3AF] font-mono tabular-nums ml-2">
@@ -457,10 +458,11 @@ export function RecipeEditor({
                   </div>
                 )}
                 {ingSearch && filteredIngredients.length === 0 && (
-                  <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-lg px-4 py-3 text-[15px] text-[#9CA3AF]">
+                  <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-[0_8px_24px_rgba(15,23,42,0.08)] px-4 py-3 text-[14px] text-[#9CA3AF]">
                     No hay ingredientes coincidentes.{' '}
-                    <Link href="/dashboard/ingredients" className="text-[#0F766E] hover:underline">
-                      Añadir ingrediente →
+                    <Link href="/dashboard/ingredients" className="group inline-flex items-center gap-1 text-[#0F766E] hover:text-[#115E59] transition-colors duration-150">
+                      Añadir ingrediente
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5" strokeWidth={1.5} />
                     </Link>
                   </div>
                 )}
@@ -508,9 +510,9 @@ export function RecipeEditor({
                           onClick={() =>
                             setSubRows((prev) => prev.filter((r) => r._key !== row._key))
                           }
-                          className="flex items-center justify-center rounded-lg p-1 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors"
+                          className="flex items-center justify-center rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.94]"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                         </button>
                       </div>
                     )
@@ -525,15 +527,15 @@ export function RecipeEditor({
                   value={subSearch}
                   onChange={(e) => setSubSearch(e.target.value)}
                 />
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF] pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF] pointer-events-none" strokeWidth={1.5} />
                 {subSearch && filteredRecipes.length > 0 && (
-                  <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-lg max-h-48 overflow-y-auto">
+                  <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-[0_8px_24px_rgba(15,23,42,0.08)] max-h-48 overflow-y-auto">
                     {filteredRecipes.slice(0, 10).map((rec) => (
                       <button
                         key={rec.id}
                         type="button"
                         onClick={() => addSubRecipeRow(rec)}
-                        className="w-full flex items-center justify-between px-4 py-2 text-[15px] text-[#111827] hover:bg-[#F8FAFC] transition-colors text-left"
+                        className="w-full flex items-center justify-between px-4 py-2 text-[14px] text-[#111827] hover:bg-[#F8FAFC] transition-colors duration-150 text-left"
                       >
                         <span>{rec.name}</span>
                         <span className="text-xs text-[#9CA3AF] ml-2">{rec.servings} rac.</span>
@@ -550,7 +552,7 @@ export function RecipeEditor({
 
               {availableRecipes.length === 0 && (
                 <div className="flex items-center gap-2 text-[13px] text-[#6B7280] bg-[#FEF3C7] border border-[#D97706]/20 rounded-lg px-3 py-2">
-                  <AlertTriangle className="h-4 w-4 shrink-0 text-[#D97706]" />
+                  <AlertTriangle className="h-4 w-4 shrink-0 text-[#D97706]" strokeWidth={1.5} />
                   Crea otras recetas primero para poder usarlas como sub-recetas.
                 </div>
               )}
@@ -600,7 +602,7 @@ export function RecipeEditor({
                     <span className="text-[11px] font-semibold uppercase tracking-widest text-[#0F766E]">
                       P.V.P. sugerido
                     </span>
-                    <span className="font-mono font-bold text-[#0F766E] text-lg tabular-nums">
+                    <span className="font-mono font-semibold text-[#0F766E] text-lg tabular-nums">
                       {suggestedPrice.toFixed(2)} €
                     </span>
                   </div>

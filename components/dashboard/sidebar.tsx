@@ -79,14 +79,17 @@ export function DashboardSidebar({ userName, tenantName, tenantSlug }: Dashboard
       <Link
         href={href}
         className={cn(
-          'flex items-center gap-2.5 px-3 py-2 rounded-lg text-[14px] transition-colors duration-150',
+          'group relative flex items-center gap-2.5 px-3 py-2 rounded-lg text-[14px] transition-[background-color,color] duration-150 active:scale-[0.98]',
           active
             ? 'bg-[#CCFBF1] text-[#0F766E] font-medium'
             : 'text-[#6B7280] font-normal hover:bg-[#F8FAFC] hover:text-[#111827]',
         )}
       >
         <Icon
-          className={cn('h-4 w-4 shrink-0', active ? 'text-[#0F766E]' : 'text-[#6B7280]')}
+          className={cn(
+            'h-4 w-4 shrink-0 transition-colors duration-150',
+            active ? 'text-[#0F766E]' : 'text-[#9CA3AF] group-hover:text-[#6B7280]',
+          )}
           strokeWidth={1.5}
         />
         {label}
@@ -96,7 +99,7 @@ export function DashboardSidebar({ userName, tenantName, tenantSlug }: Dashboard
 
   function SectionLabel({ label }: { label: string }) {
     return (
-      <p className="text-[11px] uppercase tracking-widest text-[#9CA3AF] font-medium px-3 mt-5 mb-1">
+      <p className="text-[11px] uppercase tracking-widest text-[#9CA3AF] font-medium px-3 mt-6 mb-1.5">
         {label}
       </p>
     )
@@ -105,9 +108,9 @@ export function DashboardSidebar({ userName, tenantName, tenantSlug }: Dashboard
   return (
     <aside className="w-[240px] bg-white border-r border-[#E5E7EB] flex flex-col h-screen sticky top-0 z-10 font-sans shrink-0">
       {/* Logo */}
-      <div className="py-5 px-5">
-        <Link href="/dashboard" className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-[#0F766E] flex items-center justify-center shrink-0">
+      <div className="py-5 px-5 border-b border-[#E5E7EB]">
+        <Link href="/dashboard" className="flex items-center gap-3 group">
+          <div className="w-8 h-8 rounded-xl bg-[#0F766E] flex items-center justify-center shrink-0 transition-transform duration-150 ease-out group-hover:scale-[1.04]">
             <ChefHat className="h-4 w-4 text-white" strokeWidth={1.5} />
           </div>
           <div className="min-w-0">
@@ -122,7 +125,7 @@ export function DashboardSidebar({ userName, tenantName, tenantSlug }: Dashboard
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 px-3 pb-3 overflow-y-auto">
+      <nav className="flex-1 px-3 pb-3 pt-2 overflow-y-auto">
         <SectionLabel label="Principal" />
         <div className="space-y-0.5">
           {nav.map((item) => (
@@ -159,9 +162,9 @@ export function DashboardSidebar({ userName, tenantName, tenantSlug }: Dashboard
                 href={`/${tenantSlug}/book`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[14px] text-[#6B7280] hover:bg-[#F8FAFC] hover:text-[#111827] transition-colors duration-150"
+                className="group flex items-center gap-2.5 px-3 py-2 rounded-lg text-[14px] text-[#6B7280] hover:bg-[#F8FAFC] hover:text-[#111827] transition-colors duration-150"
               >
-                <ExternalLink className="h-4 w-4 text-[#6B7280] shrink-0" strokeWidth={1.5} />
+                <ExternalLink className="h-4 w-4 text-[#9CA3AF] group-hover:text-[#6B7280] shrink-0 transition-colors duration-150" strokeWidth={1.5} />
                 Página pública
               </a>
             </div>
@@ -179,16 +182,16 @@ export function DashboardSidebar({ userName, tenantName, tenantSlug }: Dashboard
             <div className="text-[13px] font-medium text-[#111827] truncate leading-tight">
               {userName}
             </div>
-            <div className="text-[12px] text-[#6B7280] truncate leading-tight">
+            <div className="text-[12px] text-[#6B7280] truncate leading-tight mt-0.5">
               {tenantName}
             </div>
           </div>
         </div>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-[13px] text-[#6B7280] hover:bg-[#F8FAFC] hover:text-[#111827] transition-colors duration-150"
+          className="group flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-[13px] text-[#6B7280] hover:bg-[#F8FAFC] hover:text-[#111827] transition-colors duration-150 active:scale-[0.98]"
         >
-          <LogOut className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+          <LogOut className="h-4 w-4 shrink-0 text-[#9CA3AF] group-hover:text-[#6B7280] transition-colors duration-150" strokeWidth={1.5} />
           Cerrar sesión
         </button>
       </div>

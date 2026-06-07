@@ -124,9 +124,9 @@ export function NewOrderClient({ suppliers, allIngredients, alertIngredients }: 
     <div className="max-w-4xl space-y-6">
       <Link
         href="/dashboard/orders"
-        className="inline-flex items-center gap-1.5 text-[15px] text-[#6B7280] hover:text-[#111827] transition-colors"
+        className="inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors duration-150"
       >
-        <ArrowLeft className="h-3.5 w-3.5" />
+        <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
         Volver a pedidos
       </Link>
 
@@ -181,11 +181,11 @@ export function NewOrderClient({ suppliers, allIngredients, alertIngredients }: 
             <button
               type="button"
               onClick={addAlertsLines}
-              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-medium bg-[#FEF3C7] text-[#D97706] border border-[#D97706]/20 hover:bg-[#FDE7B0] transition-colors"
+              className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[13px] font-medium bg-[#FEF3C7] text-[#D97706] border border-[#D97706]/20 hover:bg-[#FDE7B0] transition-colors duration-150 active:scale-[0.97]"
             >
-              <AlertTriangle className="h-3.5 w-3.5" />
+              <AlertTriangle className="h-3.5 w-3.5" strokeWidth={1.5} />
               Añadir alertas de stock
-              <span className="bg-[#D97706] text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold">
+              <span className="bg-[#D97706] text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-semibold">
                 {alertIngredients.length}
               </span>
             </button>
@@ -193,9 +193,11 @@ export function NewOrderClient({ suppliers, allIngredients, alertIngredients }: 
         </div>
 
         {lines.length === 0 ? (
-          <p className="text-[15px] text-[#9CA3AF] py-4 text-center">
-            Sin artículos todavía. Añade uno manualmente o desde las alertas de stock.
-          </p>
+          <div className="py-8 text-center">
+            <p className="text-[14px] text-[#6B7280]">
+              Sin artículos todavía. Añade uno manualmente o desde las alertas de stock.
+            </p>
+          </div>
         ) : (
           <div className="overflow-x-auto -mx-2 px-2">
             <table className="w-full text-sm min-w-[640px]">
@@ -278,9 +280,9 @@ export function NewOrderClient({ suppliers, allIngredients, alertIngredients }: 
                       <button
                         type="button"
                         onClick={() => removeLine(line._key)}
-                        className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors"
+                        className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.97]"
                       >
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                       </button>
                     </td>
                   </tr>
@@ -293,9 +295,9 @@ export function NewOrderClient({ suppliers, allIngredients, alertIngredients }: 
         <button
           type="button"
           onClick={addEmptyLine}
-          className="inline-flex items-center gap-1.5 text-[15px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 text-[14px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors duration-150"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" strokeWidth={1.5} />
           Añadir línea
         </button>
       </div>
@@ -304,14 +306,14 @@ export function NewOrderClient({ suppliers, allIngredients, alertIngredients }: 
       <div className="flex items-center justify-end gap-3 pb-8">
         <Link
           href="/dashboard/orders"
-          className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC]"
+          className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
         >
           Cancelar
         </Link>
         <button
           onClick={handleSubmit}
           disabled={isPending}
-          className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50"
+          className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
         >
           {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
           Guardar borrador

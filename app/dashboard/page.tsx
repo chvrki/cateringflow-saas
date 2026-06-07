@@ -9,6 +9,7 @@ import {
   DollarSign,
   TrendingUp,
   AlertTriangle,
+  ArrowRight,
 } from 'lucide-react'
 import { formatCurrency } from '@/lib/utils'
 import type { Database } from '@/types/database'
@@ -125,32 +126,34 @@ export default async function DashboardPage() {
       <div className="max-w-7xl mx-auto px-8 py-8">
 
         {/* Page header */}
-        <div className="mb-8">
-          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+        <div className="mb-10">
+          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
             Panel de control
           </h1>
-          <p className="text-[15px] text-[#6B7280] mt-1">
+          <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
             Resumen general de tu actividad operativa.
           </p>
         </div>
 
         {/* KPI cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
           {kpis.map((kpi) => (
             <div
               key={kpi.title}
-              className="bg-white border border-[#E5E7EB] rounded-xl p-5"
+              className="bg-white border border-[#E5E7EB] rounded-xl p-5 transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]"
             >
-              <div className="flex items-start justify-between mb-3">
-                <span className="text-[11px] uppercase tracking-wide text-[#6B7280] font-medium">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-[12px] text-[#6B7280] font-medium leading-none">
                   {kpi.title}
                 </span>
-                <kpi.icon className="h-5 w-5 text-[#6B7280] shrink-0" strokeWidth={1.5} />
+                <span className="flex items-center justify-center h-8 w-8 rounded-lg bg-[#F8FAFC] shrink-0">
+                  <kpi.icon className="h-4 w-4 text-[#6B7280]" strokeWidth={1.5} />
+                </span>
               </div>
-              <div className="text-[28px] font-semibold text-[#111827]">
+              <div className="text-[26px] font-semibold text-[#111827] tabular-nums leading-none">
                 {kpi.value}
               </div>
-              <div className="flex items-center gap-1.5 mt-2">
+              <div className="flex items-center gap-1.5 mt-3">
                 {kpi.trend.pct === null ? (
                   <span className="text-[12px] text-[#6B7280]">{kpi.trend.label}</span>
                 ) : (
@@ -185,16 +188,17 @@ export default async function DashboardPage() {
               </div>
               <Link
                 href="/dashboard/stock?filter=alerts"
-                className="text-[13px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
+                className="group inline-flex items-center gap-1 text-[13px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
               >
-                Ver todos →
+                Ver todos
+                <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5" strokeWidth={1.5} />
               </Link>
             </div>
             <ul className="divide-y divide-[#E5E7EB]">
               {stockAlerts.map((ing: any) => (
                 <li
                   key={ing.id}
-                  className="px-6 py-3 flex items-center justify-between hover:bg-[#F8FAFC] transition-colors"
+                  className="px-6 py-3 flex items-center justify-between hover:bg-[#F8FAFC] transition-colors duration-150"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#DC2626] shrink-0" />
@@ -225,9 +229,10 @@ export default async function DashboardPage() {
             <h2 className="text-[15px] font-semibold text-[#111827]">Reservas recientes</h2>
             <Link
               href="/dashboard/bookings"
-              className="text-[13px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
+              className="group inline-flex items-center gap-1 text-[13px] text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
             >
-              Ver todas →
+              Ver todas
+              <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5" strokeWidth={1.5} />
             </Link>
           </div>
           <div className="overflow-x-auto">
@@ -249,8 +254,16 @@ export default async function DashboardPage() {
               <tbody>
                 {bookings.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="px-5 py-12 text-center text-[14px] text-[#9CA3AF] tabular-nums">
-                      No se han registrado reservas aún.
+                    <td colSpan={6} className="px-5 py-16">
+                      <div className="flex flex-col items-center justify-center text-center gap-2.5">
+                        <span className="flex items-center justify-center h-10 w-10 rounded-full bg-[#F8FAFC]">
+                          <Calendar className="h-[18px] w-[18px] text-[#9CA3AF]" strokeWidth={1.5} />
+                        </span>
+                        <p className="text-[14px] font-medium text-[#111827]">Aún no hay reservas</p>
+                        <p className="text-[13px] text-[#6B7280] max-w-xs">
+                          Las reservas que recibas a través de tu página pública aparecerán aquí.
+                        </p>
+                      </div>
                     </td>
                   </tr>
                 ) : (
@@ -259,7 +272,7 @@ export default async function DashboardPage() {
                     return (
                       <tr
                         key={b.id}
-                        className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors last:border-0"
+                        className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors duration-150 last:border-0"
                       >
                         <td className="px-5 py-3.5 text-[13px] font-medium text-[#111827] tabular-nums">{b.client_name}</td>
                         <td className="px-5 py-3.5 text-[13px] text-[#6B7280] tabular-nums">{b.menus?.name || '—'}</td>

@@ -196,9 +196,9 @@ export function MenuCost({ menuId, pricePerPerson }: MenuCostProps) {
                     type="button"
                     onClick={() => removeRecipe(mr.id, recipe.name)}
                     disabled={isPending}
-                    className="shrink-0 rounded-lg p-1 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors"
+                    className="shrink-0 rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.94] disabled:active:scale-100"
                   >
-                    <Trash2 className="h-3.5 w-3.5" />
+                    <Trash2 className="h-3.5 w-3.5" strokeWidth={1.5} />
                   </button>
                 </div>
                 <div className="flex items-center gap-2 flex-wrap text-[13px] text-[#6B7280]">
@@ -214,7 +214,7 @@ export function MenuCost({ menuId, pricePerPerson }: MenuCostProps) {
                         updatePortions(mr.id, v)
                       }
                     }}
-                    className="w-16 border border-[#E5E7EB] rounded-lg px-2 py-1 text-[13px] font-mono text-right text-[#111827] tabular-nums focus:border-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/20"
+                    className="w-16 border border-[#E5E7EB] rounded-lg px-2 py-1 text-[13px] font-mono text-right text-[#111827] tabular-nums focus-visible:border-[#0F766E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-[border-color,box-shadow] duration-150"
                   />
                   <span className="ml-auto font-mono text-[#0F766E] font-semibold tabular-nums">
                     {contribution.toFixed(4)} €/pax
@@ -237,17 +237,17 @@ export function MenuCost({ menuId, pricePerPerson }: MenuCostProps) {
             placeholder="Buscar receta…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-[#E5E7EB] rounded-lg px-3 py-2 pr-8 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] bg-white focus:border-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/20"
+            className="w-full border border-[#E5E7EB] rounded-lg px-3 py-2 pr-8 text-[14px] text-[#111827] placeholder:text-[#9CA3AF] bg-white focus-visible:border-[#0F766E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-[border-color,box-shadow] duration-150"
           />
-          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF] pointer-events-none" />
+          <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF] pointer-events-none" strokeWidth={1.5} />
           {search && filteredRecipes.length > 0 && (
-            <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-lg max-h-40 overflow-y-auto">
+            <div className="absolute z-10 mt-1 w-full bg-white border border-[#E5E7EB] rounded-lg shadow-[0_8px_24px_rgba(15,23,42,0.08)] max-h-40 overflow-y-auto">
               {filteredRecipes.slice(0, 8).map((rec) => (
                 <button
                   key={rec.id}
                   type="button"
                   onClick={() => addRecipe(rec)}
-                  className="w-full flex items-center justify-between px-3 py-2 text-[15px] text-[#111827] hover:bg-[#F8FAFC] transition-colors text-left"
+                  className="w-full flex items-center justify-between px-3 py-2 text-[14px] text-[#111827] hover:bg-[#F8FAFC] transition-colors duration-150 text-left"
                 >
                   <span>{rec.name}</span>
                   <span className="text-[13px] text-[#9CA3AF] ml-2">{rec.servings} rac.</span>

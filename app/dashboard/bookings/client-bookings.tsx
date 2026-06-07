@@ -107,7 +107,7 @@ export function ClientBookings({
           placeholder="Buscar por cliente…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full max-w-sm bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[14px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/20 focus:border-[#0F766E] transition-colors"
+          className="w-full max-w-sm bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[14px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 focus-visible:border-[#0F766E] transition-[color,border-color,box-shadow] duration-150"
         />
         <div className="flex flex-wrap items-center gap-2">
           {FILTERS.map((f) => (
@@ -116,10 +116,10 @@ export function ClientBookings({
               type="button"
               onClick={() => setFilter(f.value)}
               className={cn(
-                'px-4 py-2 text-[13px] rounded-lg font-medium transition-colors',
+                'px-4 py-2 text-[13px] rounded-lg font-medium transition-colors duration-150 active:scale-[0.97]',
                 activeFilter === f.value
                   ? 'bg-[#0F766E] text-white'
-                  : 'bg-white border border-[#E5E7EB] text-[#111827] hover:bg-[#F8FAFC]',
+                  : 'bg-white border border-[#E5E7EB] text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB]',
               )}
             >
               {f.label}
@@ -130,10 +130,12 @@ export function ClientBookings({
 
       {/* List */}
       {filtered.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-[#E5E7EB] rounded-xl">
-          <CalendarDays className="w-10 h-10 mx-auto text-[#9CA3AF] mb-4" strokeWidth={1.5} />
-          <p className="text-[15px] font-semibold text-[#111827]">Sin reservas</p>
-          <p className="text-[14px] text-[#6B7280] mt-1">No hay resultados con los filtros actuales.</p>
+        <div className="flex flex-col items-center justify-center text-center gap-2.5 py-20 bg-white border border-[#E5E7EB] rounded-xl">
+          <span className="flex items-center justify-center h-10 w-10 rounded-full bg-[#F8FAFC]">
+            <CalendarDays className="h-[18px] w-[18px] text-[#9CA3AF]" strokeWidth={1.5} />
+          </span>
+          <p className="text-[14px] font-medium text-[#111827]">Sin reservas</p>
+          <p className="text-[13px] text-[#6B7280] max-w-xs">No hay resultados con los filtros actuales.</p>
         </div>
       ) : (
         <div className="space-y-3 mb-0">
@@ -142,7 +144,7 @@ export function ClientBookings({
             return (
               <div
                 key={b.id}
-                className="bg-white border border-[#E5E7EB] rounded-xl p-5 flex gap-4 items-start hover:border-[#0F766E]/30 transition-colors duration-150"
+                className="bg-white border border-[#E5E7EB] rounded-xl p-5 flex gap-4 items-start hover:border-[#0F766E]/30 transition-[border-color,box-shadow] duration-150 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]"
               >
                 {/* Avatar */}
                 <div className="w-9 h-9 rounded-full bg-[#CCFBF1] text-[#0F766E] font-semibold text-[13px] flex items-center justify-center shrink-0">
@@ -163,7 +165,7 @@ export function ClientBookings({
                     <span>{b.guests} pax</span>
                   </div>
                   {b.event_date && (
-                    <div className="flex items-center gap-1.5 text-[13px] text-[#6B7280] mt-1">
+                    <div className="flex items-center gap-1.5 text-[13px] text-[#6B7280] mt-1.5">
                       <Calendar className="h-3.5 w-3.5 text-[#9CA3AF]" strokeWidth={1.5} />
                       {new Date(b.event_date).toLocaleDateString('es-ES', {
                         weekday: 'short', day: 'numeric', month: 'long', year: 'numeric',
@@ -182,10 +184,10 @@ export function ClientBookings({
                     <DropdownMenuTrigger asChild>
                       <button
                         type="button"
-                        className="rounded-lg border border-[#E5E7EB] bg-white p-2 text-[#6B7280] hover:bg-[#F8FAFC] focus:outline-none transition-colors"
+                        className="rounded-lg border border-[#E5E7EB] bg-white p-2 text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] focus:outline-none transition-colors duration-150 active:scale-[0.94]"
                         aria-label="Acciones"
                       >
-                        <MoreVertical className="h-4 w-4" />
+                        <MoreVertical className="h-4 w-4" strokeWidth={1.5} />
                       </button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48 rounded-lg border-[#E5E7EB] shadow-lg">
@@ -193,7 +195,7 @@ export function ClientBookings({
                         Ver detalle
                       </DropdownMenuItem>
                       <DropdownMenuItem className="cursor-pointer text-[14px]" onSelect={() => downloadPdf(b.id)}>
-                        <FileDown className="h-4 w-4" />
+                        <FileDown className="h-4 w-4" strokeWidth={1.5} />
                         Descargar PDF
                       </DropdownMenuItem>
                       {b.status === 'pending' && (
@@ -230,9 +232,9 @@ export function ClientBookings({
         >
           {detail && (
             <>
-              <SheetHeader className="px-6 py-5 border-b border-[#E5E7EB] space-y-2">
+              <SheetHeader className="px-6 py-5 border-b border-[#E5E7EB] space-y-2 pr-14">
                 <div className="flex flex-wrap items-center gap-2">
-                  <SheetTitle className="text-[17px] font-semibold text-[#111827] text-left">
+                  <SheetTitle className="text-[17px] font-semibold text-[#111827] text-left leading-tight">
                     {detail.client_name}
                   </SheetTitle>
                   <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium ${(statusMap[detail.status] ?? statusMap.pending).cls}`}>
@@ -305,7 +307,7 @@ export function ClientBookings({
                           </tr>
                           <tr>
                             <td className="py-2 font-semibold text-[#111827]">Total</td>
-                            <td className="py-2 text-right font-bold text-[#0F766E] tabular-nums">{formatCurrency(total)}</td>
+                            <td className="py-2 text-right font-semibold text-[#0F766E] tabular-nums">{formatCurrency(total)}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -322,7 +324,7 @@ export function ClientBookings({
                     value={detail.notes ?? ''}
                     placeholder="Sin notas"
                     rows={4}
-                    className="w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[14px] text-[#111827] placeholder:text-[#9CA3AF] resize-none focus:outline-none"
+                    className="w-full bg-[#F8FAFC] border border-[#E5E7EB] rounded-lg px-3 py-2 text-[14px] text-[#111827] placeholder:text-[#9CA3AF] resize-none focus:outline-none cursor-default"
                   />
                 </div>
               </div>
@@ -331,16 +333,16 @@ export function ClientBookings({
                 <button
                   type="button"
                   onClick={() => downloadPdf(detail.id)}
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
                 >
-                  <FileDown className="h-4 w-4" />
+                  <FileDown className="h-4 w-4" strokeWidth={1.5} />
                   Descargar PDF
                 </button>
                 <button
                   type="button"
                   disabled={detail.status !== 'pending' || statusBusy}
                   onClick={() => patchStatus(detail.id, 'confirmed')}
-                  className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] disabled:opacity-40 disabled:pointer-events-none transition-colors"
+                  className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] disabled:opacity-40 disabled:pointer-events-none transition-colors duration-150 active:scale-[0.97] disabled:active:scale-100"
                 >
                   Confirmar reserva
                 </button>

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { formatCurrency } from '@/lib/utils'
+import { Plus } from 'lucide-react'
 import { ClientQuotes } from './client-quotes'
 import { Pagination } from '../_components/Pagination'
 
@@ -110,24 +111,25 @@ export default async function QuotesPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen w-full">
       <div className="max-w-7xl mx-auto px-8 py-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
           <div>
-            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
               Presupuestos
             </h1>
-            <p className="text-[15px] text-[#6B7280] mt-1">
-              Gestiona y envia propuestas economicas a tus clientes.
+            <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
+              Gestiona y envía propuestas económicas a tus clientes.
             </p>
           </div>
           <Link
             href="/dashboard/quotes/new"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors shrink-0"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[14px] transition-colors duration-150 active:scale-[0.97] shrink-0"
           >
-            + Nuevo presupuesto
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
+            Nuevo presupuesto
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
           {[
             { label: 'Total presupuestos', value: String(stats.total) },
             { label: 'Enviados', value: String(stats.sent) },
@@ -136,12 +138,12 @@ export default async function QuotesPage({ searchParams }: PageProps) {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="bg-white border border-[#E5E7EB] rounded-xl p-5"
+              className="bg-white border border-[#E5E7EB] rounded-xl p-5 transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]"
             >
-              <div className="text-[11px] font-semibold uppercase tracking-widest text-[#6B7280]">
+              <div className="text-[12px] text-[#6B7280] font-medium leading-none">
                 {stat.label}
               </div>
-              <div className="font-heading text-[28px] font-semibold text-[#111827] mt-1 tabular-nums">
+              <div className="text-[26px] font-semibold text-[#111827] mt-3 tabular-nums leading-none">
                 {stat.value}
               </div>
             </div>

@@ -61,25 +61,25 @@ export default async function BookingsPage({ searchParams }: PageProps) {
     <div className="min-h-screen w-full">
       <div className="max-w-7xl mx-auto px-8 py-8">
 
-        <div className="mb-8">
-          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+        <div className="mb-10">
+          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
             Reservas y solicitudes
           </h1>
-          <p className="text-[15px] text-[#6B7280] mt-1">
+          <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
             Revisa el estado comercial general de tus eventos.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {statCards.map((s) => (
             <div
               key={s.label}
-              className="bg-white border border-[#E5E7EB] rounded-xl p-5"
+              className="bg-white border border-[#E5E7EB] rounded-xl p-5 transition-shadow duration-200 hover:shadow-[0_2px_12px_rgba(15,23,42,0.05)]"
             >
               <p className="text-[11px] uppercase tracking-wide text-[#6B7280] font-medium mb-3">
                 {s.label}
               </p>
-              <p className="text-[28px] font-semibold text-[#111827]">
+              <p className="text-[26px] font-semibold text-[#111827] tabular-nums leading-none">
                 {s.value}
               </p>
             </div>

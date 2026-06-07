@@ -7,7 +7,7 @@ import { useForm, useWatch } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { toast } from 'sonner'
-import { Send, Clock, FileText, ChevronRight, Loader2 } from 'lucide-react'
+import { Send, Clock, FileText, ChevronRight, ArrowRight, Loader2 } from 'lucide-react'
 import { cn, formatCurrency } from '@/lib/utils'
 import type { MenuOption } from './page'
 
@@ -89,7 +89,7 @@ function FieldError({ message }: { message?: string }) {
 }
 
 const inputCls =
-  'w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors'
+  'w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors duration-150'
 
 /* ─── Main component ─────────────────────────────────────────── */
 function withTimeout<T>(promise: Promise<T>, timeoutMs: number): Promise<T> {
@@ -213,23 +213,23 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
   return (
     <form ref={formRef} noValidate onSubmit={(e) => e.preventDefault()}>
       {/* ── Page header ────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-10">
         <div>
           {/* Breadcrumb */}
-          <div className="flex items-center gap-1.5 text-[15px] mb-2">
+          <div className="flex items-center gap-1.5 text-[14px] mb-2">
             <Link
               href="/dashboard/quotes"
-              className="text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
+              className="text-[#0F766E] hover:text-[#115E59] font-medium transition-colors duration-150"
             >
               Presupuestos
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-[#9CA3AF]" />
+            <ChevronRight className="h-3.5 w-3.5 text-[#9CA3AF]" strokeWidth={1.5} />
             <span className="text-[#111827] font-medium">Nuevo presupuesto</span>
           </div>
-          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
             Nuevo presupuesto
           </h1>
-          <p className="text-[15px] text-[#6B7280] mt-1">
+          <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
             Completa los datos para generar la propuesta.
           </p>
         </div>
@@ -238,7 +238,7 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
         <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/dashboard/quotes"
-            className="border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors"
+            className="border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.97]"
           >
             Cancelar
           </Link>
@@ -246,7 +246,7 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
             type="button"
             disabled={isBusy}
             onClick={() => onSubmit('draft')}
-            className="border border-[#0F766E]/30 bg-white hover:bg-[#CCFBF1] text-[#0F766E] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors disabled:opacity-50"
+            className="border border-[#0F766E]/30 bg-white hover:bg-[#CCFBF1] text-[#0F766E] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
           >
             {submitting === 'draft' ? (
               <Loader2 className="h-4 w-4 animate-spin inline mr-1.5" />
@@ -375,14 +375,18 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
           {/* Section 3 — Menú */}
           <SectionCard title="Menú seleccionado">
             {menus.length === 0 ? (
-              <div className="text-center py-10 text-[#6B7280]">
-                <FileText className="w-8 h-8 mx-auto text-[#9CA3AF] mb-2" />
-                <p className="text-[15px]">No hay menús publicados todavía.</p>
+              <div className="text-center py-10">
+                <div className="w-11 h-11 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] flex items-center justify-center mx-auto mb-3">
+                  <FileText className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+                </div>
+                <p className="text-[15px] font-medium text-[#111827]">No hay menús publicados</p>
+                <p className="text-[14px] text-[#6B7280] mt-1">Crea un menú para poder seleccionarlo aquí.</p>
                 <Link
                   href="/dashboard/menus"
-                  className="text-[#0F766E] hover:text-[#115E59] text-[15px] mt-1 inline-block transition-colors"
+                  className="group inline-flex items-center gap-1 text-[#0F766E] hover:text-[#115E59] text-[14px] font-medium mt-3 transition-colors duration-150"
                 >
-                  Ir a Menús →
+                  Ir a Menús
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={1.5} />
                 </Link>
               </div>
             ) : (
@@ -398,7 +402,7 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
                           setValue('menu_id', menu.id, { shouldValidate: true })
                         }
                         className={cn(
-                          'text-left rounded-lg p-4 cursor-pointer transition-all duration-150',
+                          'text-left rounded-lg p-4 cursor-pointer transition-colors duration-150 active:scale-[0.99]',
                           selected
                             ? 'bg-[#CCFBF1] border-2 border-[#0F766E]'
                             : 'bg-white border border-[#E5E7EB] hover:border-[#0F766E]/30'
@@ -594,7 +598,7 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
             {/* Valid until */}
             {watched.valid_until && (
               <p className="flex items-center gap-1 text-[13px] text-[#9CA3AF] mt-3">
-                <Clock className="h-3 w-3 shrink-0" />
+                <Clock className="h-3 w-3 shrink-0" strokeWidth={1.5} />
                 Válido hasta el {formatDateEs(watched.valid_until)}
               </p>
             )}
@@ -605,7 +609,7 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
                 type="button"
                 disabled={isBusy}
                 onClick={() => onSubmit('draft')}
-                className="w-full border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors disabled:opacity-50"
+                className="w-full border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100"
               >
                 {submitting === 'draft' && (
                   <Loader2 className="h-4 w-4 animate-spin inline mr-1.5" />
@@ -618,12 +622,12 @@ export function NewQuoteForm({ menus }: { menus: MenuOption[] }) {
                 type="button"
                 disabled={isBusy}
                 onClick={() => onSubmit('send')}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100"
               >
                 {submitting === 'send' ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <Send className="h-4 w-4" />
+                  <Send className="h-4 w-4" strokeWidth={1.5} />
                 )}
                 Generar y enviar PDF
               </button>

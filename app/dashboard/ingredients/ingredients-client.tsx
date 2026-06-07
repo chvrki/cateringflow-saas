@@ -121,10 +121,10 @@ function InlineCostCell({ ingredient }: { ingredient: Ingredient }) {
       type="button"
       title="Haz clic para editar"
       onClick={() => setEditing(true)}
-      className="group flex items-center gap-1 font-mono text-sm tabular-nums text-[#111827] hover:text-[#0F766E] transition-colors"
+      className="group flex items-center gap-1.5 font-mono text-sm tabular-nums text-[#111827] hover:text-[#0F766E] transition-colors duration-150"
     >
       {Number(ingredient.cost_per_unit).toFixed(4)} €/{formatCostUnit(ingredient.unit)}
-      <Pencil className="h-3 w-3 opacity-0 group-hover:opacity-60 transition-opacity" />
+      <Pencil className="h-3 w-3 opacity-0 group-hover:opacity-60 transition-opacity duration-150" strokeWidth={1.5} />
     </button>
   )
 }
@@ -241,7 +241,7 @@ export function IngredientsClient({
           <select
             value={currentSupplier}
             onChange={(e) => setParam('supplier', e.target.value)}
-            className="bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[15px] text-[#111827] focus:border-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/20"
+            className="bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[14px] text-[#111827] focus-visible:border-[#0F766E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-[border-color,box-shadow] duration-150"
           >
             <option value="">Todos los proveedores</option>
             {suppliers.map((s) => (
@@ -252,7 +252,7 @@ export function IngredientsClient({
           <select
             value={currentSort}
             onChange={(e) => setParam('sort', e.target.value)}
-            className="bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[15px] text-[#111827] focus:border-[#0F766E] focus:outline-none focus:ring-2 focus:ring-[#0F766E]/20"
+            className="bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[14px] text-[#111827] focus-visible:border-[#0F766E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-[border-color,box-shadow] duration-150"
           >
             <option value="name">Nombre A→Z</option>
             <option value="cost_asc">Coste ↑</option>
@@ -266,26 +266,28 @@ export function IngredientsClient({
 
         <button
           onClick={openCreate}
-          className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors shrink-0"
+          className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] shrink-0"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" strokeWidth={1.5} />
           Nuevo ingrediente
         </button>
       </div>
 
       {/* Table */}
       {ingredients.length === 0 ? (
-        <div className="bg-white border border-dashed border-[#E5E7EB] rounded-xl p-16 text-center flex flex-col items-center justify-center">
-          <ShoppingBasket className="w-12 h-12 text-[#9CA3AF] mb-4" />
-          <h3 className="font-heading font-semibold text-[#111827] text-lg">Sin ingredientes todavía</h3>
-          <p className="text-[15px] text-[#6B7280] mt-2 mb-6 max-w-sm mx-auto">
-            Añade materias primas para calcular los costes de tus escandallos.
-          </p>
+        <div className="flex flex-col items-center justify-center text-center gap-3 py-20 bg-white border border-[#E5E7EB] rounded-xl">
+          <span className="flex items-center justify-center h-12 w-12 rounded-full bg-[#F8FAFC]">
+            <ShoppingBasket className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+          </span>
+          <div>
+            <p className="text-[14px] font-medium text-[#111827]">Sin ingredientes todavía</p>
+            <p className="text-[13px] text-[#6B7280] mt-1 max-w-sm">Añade materias primas para calcular los costes de tus escandallos.</p>
+          </div>
           <button
             onClick={openCreate}
-            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] mt-1"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
             Añadir primer ingrediente
           </button>
         </div>
@@ -300,7 +302,7 @@ export function IngredientsClient({
                   <th className="px-5 py-3 text-[12px] uppercase tracking-wide text-[#6B7280] font-medium">
                     <span className="flex items-center gap-1">
                       Coste
-                      <ArrowUpDown className="h-3 w-3" />
+                      <ArrowUpDown className="h-3 w-3" strokeWidth={1.5} />
                     </span>
                   </th>
                   <th className="px-5 py-3 text-[12px] uppercase tracking-wide text-[#6B7280] font-medium">Merma</th>
@@ -312,7 +314,7 @@ export function IngredientsClient({
                 {ingredients.map((ing) => (
                   <tr
                     key={ing.id}
-                    className="border-b border-[#E5E7EB] last:border-0 hover:bg-[#F8FAFC] transition-colors"
+                    className="border-b border-[#E5E7EB] last:border-0 hover:bg-[#F8FAFC] transition-colors duration-150"
                   >
                     <td className="px-5 py-3.5 font-medium text-[#111827]">{ing.name}</td>
                     <td className="px-5 py-3.5 text-[#6B7280] font-mono text-xs">{ing.unit}</td>
@@ -334,21 +336,21 @@ export function IngredientsClient({
                         <button
                           type="button"
                           onClick={() => openEdit(ing)}
-                          className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#0F766E] hover:bg-[#CCFBF1] transition-colors"
+                          className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#0F766E] hover:bg-[#CCFBF1] transition-colors duration-150 active:scale-[0.94]"
                           title="Editar"
                         >
-                          <Pencil className="h-3.5 w-3.5" />
+                          <Pencil className="h-3.5 w-3.5" strokeWidth={1.5} />
                         </button>
                         <button
                           type="button"
                           onClick={() => handleDelete(ing)}
                           disabled={deletingId === ing.id}
-                          className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors disabled:opacity-40"
+                          className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.94] disabled:opacity-40 disabled:active:scale-100"
                           title="Eliminar"
                         >
                           {deletingId === ing.id
-                            ? <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                            : <Trash2 className="h-3.5 w-3.5" />}
+                            ? <Loader2 className="h-3.5 w-3.5 animate-spin" strokeWidth={1.5} />
+                            : <Trash2 className="h-3.5 w-3.5" strokeWidth={1.5} />}
                         </button>
                       </div>
                     </td>
@@ -497,11 +499,11 @@ export function IngredientsClient({
             </Form>
           </div>
 
-          <SheetFooter className="p-4 border-t border-[#E5E7EB] flex flex-row gap-3 sm:justify-start bg-[#F8FAFC]/80">
+          <SheetFooter className="p-4 border-t border-[#E5E7EB] flex flex-row gap-3 sm:justify-start bg-[#F8FAFC]">
             <button
               type="button"
               onClick={() => setSheetOpen(false)}
-              className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC]"
+              className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
             >
               Cancelar
             </button>
@@ -509,10 +511,10 @@ export function IngredientsClient({
               type="submit"
               form="ingredient-form"
               disabled={isPending}
-              className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50"
+              className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               {isPending ? (
-                <><Loader2 className="h-4 w-4 animate-spin mr-2" />Guardando…</>
+                <><Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />Guardando…</>
               ) : (
                 editTarget ? 'Guardar cambios' : 'Crear ingrediente'
               )}

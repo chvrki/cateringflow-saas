@@ -58,7 +58,7 @@ export default function OnboardingPage() {
   }
 
   const inputBase =
-    "w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#0F766E] focus:ring-2 focus:ring-[#0F766E]/20 transition-colors duration-200"
+    "w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3.5 text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#0F766E] focus:ring-2 focus:ring-[#0F766E]/20 transition-colors duration-150"
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center px-4 py-12 font-sans">
@@ -67,13 +67,13 @@ export default function OnboardingPage() {
         <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden">
           <div className="px-8 py-10 sm:px-10">
             <div className="text-center mb-10">
-              <h1 className="font-heading text-3xl font-bold text-[#111827] tracking-wide">
+              <h1 className="font-heading text-3xl font-semibold text-[#111827] tracking-wide">
                 Caterix
               </h1>
             </div>
 
             <div className="text-center mb-10">
-              <h2 className="font-heading text-2xl sm:text-3xl font-bold text-[#111827] tracking-tight text-balance">
+              <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-[#111827] tracking-tight text-balance">
                 Configura tu espacio
               </h2>
               <p className="mt-2 text-[#6B7280] text-sm font-medium">
@@ -85,9 +85,9 @@ export default function OnboardingPage() {
               <div className="space-y-2">
                 <label
                   htmlFor="company-name"
-                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#9CA3AF]"
+                  className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#9CA3AF]"
                 >
-                  <Building2 className="w-3.5 h-3.5" />
+                  <Building2 className="w-3.5 h-3.5" strokeWidth={1.5} />
                   Nombre comercial
                 </label>
                 <input
@@ -105,9 +105,9 @@ export default function OnboardingPage() {
               <div className="space-y-2">
                 <label
                   htmlFor="url-slug"
-                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#9CA3AF]"
+                  className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#9CA3AF]"
                 >
-                  <Link className="w-3.5 h-3.5" />
+                  <Link className="w-3.5 h-3.5" strokeWidth={1.5} />
                   Identificador URL
                 </label>
                 <div>
@@ -141,11 +141,11 @@ export default function OnboardingPage() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="w-full mt-10 bg-[#0F766E] hover:bg-[#115E59] text-white font-bold py-3.5 px-6 rounded-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full mt-10 bg-[#0F766E] hover:bg-[#115E59] text-white font-semibold py-3.5 px-6 rounded-lg transition-colors duration-150 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E] focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
               >
                 {isPending ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <Loader2 className="h-4 w-4 animate-spin" strokeWidth={1.5} />
                     Procesando...
                   </>
                 ) : (
@@ -158,7 +158,7 @@ export default function OnboardingPage() {
           <div className="bg-[#F8FAFC] border-t border-[#E5E7EB] px-8 py-5 text-center">
             <p className="text-xs text-[#6B7280]">
               Al continuar confirmas aceptar los{" "}
-              <a href="#" className="font-medium text-[#111827] hover:text-[#0F766E] transition-colors underline underline-offset-2">
+              <a href="#" className="font-medium text-[#111827] hover:text-[#0F766E] transition-colors duration-150 underline underline-offset-2">
                 Términos de la plataforma
               </a>
             </p>

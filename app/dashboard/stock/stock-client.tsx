@@ -62,13 +62,13 @@ export function StockClient({ ingredients, alertsOnly, bookings }: StockClientPr
             router.push(alertsOnly ? '/dashboard/stock' : '/dashboard/stock?filter=alerts')
           }
           className={cn(
-            'inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-[15px] font-medium border transition-colors',
+            'inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-[14px] font-medium border transition-colors duration-150 active:scale-[0.97]',
             alertsOnly
               ? 'bg-[#DC2626] border-[#DC2626] text-white hover:bg-[#B91C1C]'
-              : 'bg-white border-[#E5E7EB] text-[#111827] hover:bg-[#F8FAFC]'
+              : 'bg-white border-[#E5E7EB] text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB]'
           )}
         >
-          <AlertTriangle className="h-4 w-4" />
+          <AlertTriangle className="h-4 w-4" strokeWidth={1.5} />
           {alertsOnly ? 'Ver todos' : 'Solo alertas'}
         </button>
       </div>
@@ -90,17 +90,27 @@ export function StockClient({ ingredients, alertsOnly, bookings }: StockClientPr
           <tbody>
             {ingredients.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-6 py-12 text-center text-[15px] text-[#9CA3AF]">
-                  {alertsOnly
-                    ? 'Sin ingredientes en alerta. El stock de todos los ingredientes es suficiente.'
-                    : 'No hay ingredientes registrados. Añade ingredientes desde la sección Ingredientes.'}
+                <td colSpan={7} className="px-6 py-16 text-center">
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="w-11 h-11 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] flex items-center justify-center mb-2">
+                      <AlertTriangle className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+                    </div>
+                    <p className="text-[15px] font-medium text-[#111827]">
+                      {alertsOnly ? 'Sin alertas de stock' : 'No hay ingredientes registrados'}
+                    </p>
+                    <p className="text-[14px] text-[#6B7280]">
+                      {alertsOnly
+                        ? 'El stock de todos los ingredientes es suficiente.'
+                        : 'Añade ingredientes desde la sección Ingredientes.'}
+                    </p>
+                  </div>
                 </td>
               </tr>
             ) : (
               ingredients.map((ing) => (
                 <tr
                   key={ing.id}
-                  className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors last:border-0"
+                  className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors duration-150 last:border-0"
                 >
                   <td className="px-6 py-4 text-[15px] font-medium text-[#111827]">{ing.name}</td>
                   <td className="px-6 py-4 text-[15px] text-[#6B7280]">{ing.unit}</td>
@@ -129,13 +139,13 @@ export function StockClient({ ingredients, alertsOnly, bookings }: StockClientPr
                     <div className="flex items-center justify-end gap-2">
                       <button
                         onClick={() => open(ing, 'movement')}
-                        className="inline-flex items-center rounded-lg border border-[#E5E7EB] px-3 py-1.5 text-xs font-medium text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+                        className="inline-flex items-center rounded-lg border border-[#E5E7EB] px-3 py-1.5 text-xs font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
                       >
                         Movimiento
                       </button>
                       <button
                         onClick={() => open(ing, 'adjust')}
-                        className="inline-flex items-center rounded-lg border border-[#E5E7EB] px-3 py-1.5 text-xs font-medium text-[#6B7280] hover:bg-[#F8FAFC] transition-colors"
+                        className="inline-flex items-center rounded-lg border border-[#E5E7EB] px-3 py-1.5 text-xs font-medium text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
                       >
                         Ajuste
                       </button>

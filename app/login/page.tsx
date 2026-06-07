@@ -120,8 +120,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-2">
-            <ChefHat className="h-8 w-8 text-[#0F766E]" />
-            <span className="text-2xl font-bold text-[#111827]">
+            <ChefHat className="h-8 w-8 text-[#0F766E]" strokeWidth={1.5} />
+            <span className="text-2xl font-semibold text-[#111827]">
               Caterix
             </span>
           </Link>
@@ -130,7 +130,7 @@ export default function LoginPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl">
-              <LogIn className="h-5 w-5 text-[#0F766E]" />
+              <LogIn className="h-5 w-5 text-[#0F766E]" strokeWidth={1.5} />
               Iniciar sesión
             </CardTitle>
             <CardDescription>
@@ -152,7 +152,7 @@ export default function LoginPage() {
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" strokeWidth={1.5} />
                           <Input
                             type="email"
                             placeholder="tu@catering.com"
@@ -175,7 +175,7 @@ export default function LoginPage() {
                       <FormLabel>Contraseña</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
+                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" strokeWidth={1.5} />
                           <Input
                             type="password"
                             autoComplete="current-password"
@@ -196,7 +196,7 @@ export default function LoginPage() {
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      <Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />
                       Accediendo...
                     </>
                   ) : (
@@ -226,7 +226,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  <Chrome className="h-4 w-4 mr-2" />
+                  <Chrome className="h-4 w-4 mr-2" strokeWidth={1.5} />
                   Iniciar sesión con Google
                 </>
               )}

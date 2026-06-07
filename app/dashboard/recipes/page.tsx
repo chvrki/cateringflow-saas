@@ -77,36 +77,38 @@ export default async function RecipesPage() {
   return (
     <div className="min-h-screen w-full">
       <div className="max-w-7xl mx-auto px-8 py-8">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
               Escandallos
             </h1>
-            <p className="text-[15px] text-[#6B7280] mt-1">
+            <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
               Desglosa el coste de cada receta por ingrediente.
             </p>
           </div>
           <Link
             href="/dashboard/recipes/new"
-            className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+            className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97]"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
             Nueva receta
           </Link>
         </div>
 
         {recipes.length === 0 ? (
-          <div className="bg-white border border-dashed border-[#E5E7EB] rounded-xl p-16 text-center flex flex-col items-center justify-center">
-            <ClipboardList className="w-12 h-12 text-[#9CA3AF] mb-4" />
-            <h3 className="font-heading font-semibold text-[#111827] text-lg">Sin escandallos todavía</h3>
-            <p className="text-[15px] text-[#6B7280] mt-2 mb-6 max-w-sm mx-auto">
-              Crea tu primera receta para calcular costes y márgenes.
-            </p>
+          <div className="flex flex-col items-center justify-center text-center gap-3 py-20 bg-white border border-[#E5E7EB] rounded-xl">
+            <span className="flex items-center justify-center h-12 w-12 rounded-full bg-[#F8FAFC]">
+              <ClipboardList className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+            </span>
+            <div>
+              <p className="text-[14px] font-medium text-[#111827]">Sin escandallos todavía</p>
+              <p className="text-[13px] text-[#6B7280] mt-1 max-w-sm">Crea tu primera receta para calcular costes y márgenes.</p>
+            </div>
             <Link
               href="/dashboard/recipes/new"
-              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] mt-1"
             >
-              <Plus className="h-4 w-4" />
+              <Plus className="h-4 w-4" strokeWidth={1.5} />
               Crear primera receta
             </Link>
           </div>
@@ -132,12 +134,12 @@ export default async function RecipesPage() {
                     return (
                       <tr
                         key={recipe.id}
-                        className="border-b border-[#E5E7EB] last:border-0 hover:bg-[#F8FAFC] transition-colors"
+                        className="border-b border-[#E5E7EB] last:border-0 hover:bg-[#F8FAFC] transition-colors duration-150"
                       >
                         <td className="px-5 py-3.5">
                           <Link
                             href={`/dashboard/recipes/${recipe.id}`}
-                            className="font-medium text-[#111827] hover:text-[#0F766E] transition-colors"
+                            className="font-medium text-[#111827] hover:text-[#0F766E] transition-colors duration-150"
                           >
                             {recipe.name}
                           </Link>
@@ -163,7 +165,7 @@ export default async function RecipesPage() {
                         <td className="px-5 py-3.5">
                           <Link
                             href={`/dashboard/recipes/${recipe.id}`}
-                            className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] px-3 py-1.5 text-xs font-medium text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+                            className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] px-3 py-1.5 text-xs font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
                           >
                             Editar
                           </Link>

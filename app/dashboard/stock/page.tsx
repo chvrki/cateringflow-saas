@@ -64,11 +64,11 @@ export default async function StockPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen w-full">
       <div className="max-w-7xl mx-auto px-8 py-8">
-        <div className="mb-8">
-          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+        <div className="mb-10">
+          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
             Stock
           </h1>
-          <p className="text-[15px] text-[#6B7280] mt-1">
+          <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
             Inventario de ingredientes y alertas de stock mínimo.
           </p>
         </div>

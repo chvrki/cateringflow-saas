@@ -39,7 +39,7 @@ const bookingSchema = z.object({
 type BookingFormData = z.infer<typeof bookingSchema>
 
 const inputClass =
-  'w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3 text-sm text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#0F766E] focus:ring-2 focus:ring-[#0F766E]/20 transition-colors'
+  'w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-3 text-sm text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#0F766E] focus:ring-2 focus:ring-[#0F766E]/20 transition-colors duration-150'
 
 const labelClass =
   'text-xs font-semibold uppercase tracking-wide text-[#6B7280]'
@@ -91,8 +91,8 @@ export function BookingForm({ tenantId, menus, tenantName }: BookingFormProps) {
     const total = selectedMenu ? submittedData.guests * selectedMenu.price_per_person : 0
     return (
       <div className="text-center flex flex-col items-center animate-in fade-in duration-500">
-        <CheckCircle2 className="w-16 h-16 text-[#16A34A] mx-auto" />
-        <h2 className="font-heading text-2xl font-bold text-[#111827] text-center mt-4">
+        <CheckCircle2 className="w-16 h-16 text-[#16A34A] mx-auto" strokeWidth={1.5} />
+        <h2 className="font-heading text-2xl font-semibold text-[#111827] text-center mt-4">
           ¡Solicitud enviada!
         </h2>
         <p className="text-sm text-[#6B7280] text-center mt-2 max-w-sm mx-auto">
@@ -147,7 +147,7 @@ export function BookingForm({ tenantId, menus, tenantName }: BookingFormProps) {
                     setValue('menu_id', menu.id, { shouldValidate: true })
                   }
                 }}
-                className={`relative cursor-pointer rounded-xl p-4 transition-all ${
+                className={`cursor-pointer rounded-xl p-4 transition-colors duration-150 active:scale-[0.99] ${
                   isSelected
                     ? 'bg-[#CCFBF1] border-2 border-[#0F766E]'
                     : 'bg-white border border-[#E5E7EB] hover:border-[#0F766E]/40'
@@ -155,17 +155,17 @@ export function BookingForm({ tenantId, menus, tenantName }: BookingFormProps) {
               >
                 <div className="flex justify-between items-start mb-2 gap-2">
                   <h4 className="text-sm font-semibold text-[#111827]">{menu.name}</h4>
-                  <span className="text-[#0F766E] font-mono font-semibold text-sm whitespace-nowrap tabular-nums">
-                    {formatCurrency(menu.price_per_person)}
-                  </span>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[#0F766E] font-mono font-semibold text-sm whitespace-nowrap tabular-nums">
+                      {formatCurrency(menu.price_per_person)}
+                    </span>
+                    {isSelected && (
+                      <CheckCircle2 className="h-4 w-4 text-[#0F766E] shrink-0" strokeWidth={1.5} aria-hidden />
+                    )}
+                  </div>
                 </div>
                 {menu.description && (
                   <p className="text-xs text-[#6B7280] mt-1 line-clamp-2">{menu.description}</p>
-                )}
-                {isSelected && (
-                  <div className="absolute top-3 right-3 text-[#0F766E]" aria-hidden>
-                    <CheckCircle2 className="w-4 h-4 text-[#0F766E]" />
-                  </div>
                 )}
               </div>
             )
@@ -209,9 +209,9 @@ export function BookingForm({ tenantId, menus, tenantName }: BookingFormProps) {
             {errors.guests && <p className="text-[#DC2626] text-sm">{errors.guests.message}</p>}
           </div>
         </div>
-        <div className="bg-[#FEF3C7] border border-[#D97706]/20 rounded-lg px-4 py-3 flex items-center justify-between">
-          <span className="text-sm text-[#D97706]">Estimación:</span>
-          <span className="text-base font-semibold text-[#D97706] tabular-nums">{formatCurrency(estimatedTotal)}</span>
+        <div className="bg-[#CCFBF1] border border-[#0F766E]/20 rounded-lg px-4 py-3 flex items-center justify-between">
+          <span className="text-sm text-[#0F766E] font-medium">Estimación:</span>
+          <span className="text-base font-semibold text-[#0F766E] tabular-nums">{formatCurrency(estimatedTotal)}</span>
         </div>
       </div>
 
@@ -271,17 +271,17 @@ export function BookingForm({ tenantId, menus, tenantName }: BookingFormProps) {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full bg-[#0F766E] hover:bg-[#115E59] text-white rounded-lg py-3.5 text-base font-semibold font-heading transition-colors disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          className="w-full bg-[#0F766E] hover:bg-[#115E59] text-white rounded-lg py-3.5 text-base font-semibold font-heading transition-colors duration-150 active:scale-[0.97] disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2"
         >
           {isPending ? (
             <>
-              <Loader2 className="h-5 w-5 animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" strokeWidth={1.5} />
               Enviando...
             </>
           ) : (
             <>
               Enviar solicitud de reserva
-              <Send className="h-4 w-4" />
+              <Send className="h-4 w-4" strokeWidth={1.5} />
             </>
           )}
         </button>

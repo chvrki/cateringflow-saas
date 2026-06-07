@@ -112,9 +112,9 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
       <div className="flex items-start justify-between mb-8 flex-wrap gap-4 print:hidden">
         <Link
           href="/dashboard/orders"
-          className="inline-flex items-center gap-1.5 text-[15px] text-[#6B7280] hover:text-[#111827] transition-colors"
+          className="inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors duration-150"
         >
-          <ArrowLeft className="h-3.5 w-3.5" />
+          <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
           Volver a pedidos
         </Link>
 
@@ -122,9 +122,9 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
           <button
             type="button"
             onClick={() => window.print()}
-            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[15px] font-medium text-[#111827] border border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-[14px] font-medium text-[#111827] border border-[#E5E7EB] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
           >
-            <Printer className="h-4 w-4" />
+            <Printer className="h-4 w-4" strokeWidth={1.5} />
             Imprimir
           </button>
 
@@ -132,11 +132,11 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
             <button
               onClick={handleMarkSent}
               disabled={isPending}
-              className="inline-flex items-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50 transition-colors"
+              className="inline-flex items-center rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               {isPending
                 ? <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                : <Send className="h-4 w-4 mr-2" />}
+                : <Send className="h-4 w-4 mr-2" strokeWidth={1.5} />}
               Marcar como enviado
             </button>
           )}
@@ -146,17 +146,17 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
               <button
                 onClick={handleCancel}
                 disabled={isPending}
-                className="inline-flex items-center rounded-lg border border-[#DC2626]/20 px-4 py-2 text-[15px] font-medium text-[#DC2626] hover:bg-[#FEE2E2] disabled:opacity-50 transition-colors"
+                className="inline-flex items-center rounded-lg border border-[#DC2626]/20 px-4 py-2 text-[14px] font-medium text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
               >
-                <XCircle className="h-4 w-4 mr-2" />
+                <XCircle className="h-4 w-4 mr-2" strokeWidth={1.5} />
                 Cancelar pedido
               </button>
               <button
                 onClick={openSheet}
                 disabled={isPending}
-                className="inline-flex items-center rounded-lg bg-[#16A34A] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#15803D] disabled:opacity-50 transition-colors"
+                className="inline-flex items-center rounded-lg bg-[#16A34A] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#15803D] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
               >
-                <PackageCheck className="h-4 w-4 mr-2" />
+                <PackageCheck className="h-4 w-4 mr-2" strokeWidth={1.5} />
                 Registrar recepción
               </button>
             </>
@@ -285,7 +285,7 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
                 >
                   Total estimado
                 </td>
-                <td className="px-5 py-3 text-right tabular-nums font-bold text-[#111827]">
+                <td className="px-5 py-3 text-right tabular-nums font-semibold text-[#111827]">
                   {fmt(total)} €
                 </td>
                 <td />
@@ -360,14 +360,14 @@ export function OrderDetailClient({ order }: { order: OrderDetail }) {
               type="button"
               onClick={() => setSheetOpen(false)}
               disabled={isPending}
-              className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] disabled:opacity-50"
+              className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               Cancelar
             </button>
             <button
               onClick={handleReceive}
               disabled={isPending}
-              className="flex-1 inline-flex items-center justify-center rounded-lg bg-[#16A34A] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#15803D] disabled:opacity-50"
+              className="flex-1 inline-flex items-center justify-center rounded-lg bg-[#16A34A] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#15803D] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
               Confirmar recepción

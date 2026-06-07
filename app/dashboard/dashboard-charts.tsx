@@ -45,19 +45,20 @@ export function DashboardCharts({ bookings }: { bookings: any[] }) {
         ].filter((d) => d.value > 0)
 
   const tooltipStyle = {
-    borderRadius: '12px',
+    borderRadius: '10px',
     border: '1px solid #E5E7EB',
-    boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+    boxShadow: '0 8px 24px rgba(15,23,42,0.08)',
     fontSize: '13px',
     color: '#111827',
+    padding: '8px 12px',
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
       {/* Area chart */}
       <div className="col-span-2 bg-white border border-[#E5E7EB] rounded-xl p-6">
-        <h3 className="text-[15px] font-semibold text-[#111827]">Reservas por mes</h3>
-        <p className="text-[13px] text-[#6B7280] mb-6">Últimos 6 meses</p>
+        <h3 className="text-[15px] font-semibold text-[#111827] leading-tight">Reservas por mes</h3>
+        <p className="text-[13px] text-[#6B7280] mt-1 mb-6 leading-relaxed">Últimos 6 meses</p>
         <div className="h-56 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={areaData}>
@@ -93,8 +94,8 @@ export function DashboardCharts({ bookings }: { bookings: any[] }) {
 
       {/* Pie chart */}
       <div className="col-span-1 bg-white border border-[#E5E7EB] rounded-xl p-6">
-        <h3 className="text-[15px] font-semibold text-[#111827]">Por estado</h3>
-        <p className="text-[13px] text-[#6B7280] mb-6">Distribución actual</p>
+        <h3 className="text-[15px] font-semibold text-[#111827] leading-tight">Por estado</h3>
+        <p className="text-[13px] text-[#6B7280] mt-1 mb-6 leading-relaxed">Distribución actual</p>
         <div className="h-56 w-full flex items-center justify-center">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>

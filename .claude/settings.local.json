@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "Bash(npx tailwindcss *)"
+      "Bash(npx tailwindcss *)",
+      "Bash(git -C . log -1 --format=%ci -- types/database.ts)"
     ]
   }
 }

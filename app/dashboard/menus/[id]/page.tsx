@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import { Loader2, ArrowLeft, Image as ImageIcon } from 'lucide-react'
+import { Loader2, ArrowLeft, ArrowRight, Image as ImageIcon, Plus, UtensilsCrossed } from 'lucide-react'
 
 import { createClient } from '@/lib/supabase/client'
 import { type AllergenId } from '@/lib/utils'
@@ -265,9 +265,9 @@ export default function EditMenuPage() {
         <div className="max-w-6xl mx-auto space-y-6">
           <Link
             href="/dashboard/menus"
-            className="inline-flex items-center text-[15px] text-[#6B7280] hover:text-[#111827] transition-colors"
+            className="group inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors duration-150"
           >
-            <ArrowLeft className="h-4 w-4 mr-1" />
+            <ArrowLeft className="h-4 w-4 transition-transform duration-150 ease-out group-hover:-translate-x-0.5" strokeWidth={1.5} />
             Menús
           </Link>
 
@@ -288,7 +288,7 @@ export default function EditMenuPage() {
                 </span>
               </nav>
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+                <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
                   {watchName || 'Menú'}
                 </h1>
                 <Badge
@@ -308,14 +308,14 @@ export default function EditMenuPage() {
             <div className="flex flex-wrap items-center gap-2 shrink-0">
               <Link
                 href="/dashboard/menus"
-                className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+                className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
               >
                 Cancelar
               </Link>
               <Button
                 type="button"
                 variant="outline"
-                className="rounded-lg border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC]"
+                className="rounded-lg border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]"
                 onClick={() =>
                   form.setValue('active', !form.getValues('active'), {
                     shouldDirty: true,
@@ -328,11 +328,11 @@ export default function EditMenuPage() {
                 type="submit"
                 form="edit-menu-form"
                 disabled={isSubmitting}
-                className="rounded-lg bg-[#0F766E] text-white hover:bg-[#115E59] font-medium"
+                className="rounded-lg bg-[#0F766E] text-white hover:bg-[#115E59] font-medium transition-colors duration-150 active:scale-[0.97] disabled:active:scale-100"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />
                     Guardando…
                   </>
                 ) : (
@@ -528,11 +528,11 @@ export default function EditMenuPage() {
                                   </div>
                                 ) : (
                                   <div className="w-full max-w-xs aspect-video rounded-lg border border-dashed border-[#E5E7EB] bg-[#F8FAFC] flex items-center justify-center">
-                                    <ImageIcon className="h-10 w-10 text-[#9CA3AF]" />
+                                    <ImageIcon className="h-8 w-8 text-[#9CA3AF]" strokeWidth={1.5} />
                                   </div>
                                 )}
                                 <label className="inline-flex cursor-pointer">
-                                  <span className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] transition-colors">
+                                  <span className="inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[14px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97]">
                                     Cambiar imagen
                                   </span>
                                   <input
@@ -570,24 +570,26 @@ export default function EditMenuPage() {
                   </h2>
                   <Link
                     href={`/dashboard/menus/${params.id}/items`}
-                    className="inline-flex items-center justify-center rounded-lg bg-[#0F766E] text-white text-[13px] font-medium px-3 py-1.5 hover:bg-[#115E59] transition-colors w-fit"
+                    className="inline-flex items-center justify-center gap-1 rounded-lg bg-[#0F766E] text-white text-[13px] font-medium px-3 py-1.5 hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] w-fit"
                   >
-                    + Añadir plato
+                    <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
+                    Añadir plato
                   </Link>
                 </div>
-                <p className="text-[15px] text-[#9CA3AF] text-center py-10">
-                  Añade el primer plato
-                </p>
-                <p className="text-[13px] text-[#6B7280] text-center -mt-6 mb-2">
-                  Los entrantes, principales y postres se gestionan en la vista de
-                  platos.
-                </p>
-                <div className="flex justify-center">
+                <div className="flex flex-col items-center justify-center text-center gap-2.5 py-10">
+                  <span className="flex items-center justify-center h-10 w-10 rounded-full bg-[#F8FAFC]">
+                    <UtensilsCrossed className="h-[18px] w-[18px] text-[#9CA3AF]" strokeWidth={1.5} />
+                  </span>
+                  <p className="text-[14px] font-medium text-[#111827]">Añade el primer plato</p>
+                  <p className="text-[13px] text-[#6B7280] max-w-xs leading-relaxed">
+                    Los entrantes, principales y postres se gestionan en la vista de platos.
+                  </p>
                   <Link
                     href={`/dashboard/menus/${params.id}/items`}
-                    className="text-[15px] font-medium text-[#0F766E] hover:text-[#115E59] transition-colors"
+                    className="group inline-flex items-center gap-1 text-[13px] font-medium text-[#0F766E] hover:text-[#115E59] transition-colors duration-150 mt-1"
                   >
-                    Abrir editor de platos →
+                    Abrir editor de platos
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-150 ease-out group-hover:translate-x-0.5" strokeWidth={1.5} />
                   </Link>
                 </div>
               </div>

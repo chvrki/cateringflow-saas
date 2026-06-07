@@ -121,26 +121,28 @@ export function SuppliersClient({ suppliers }: SuppliersClientProps) {
         </span>
         <button
           onClick={openCreate}
-          className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+          className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97]"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" strokeWidth={1.5} />
           Nuevo proveedor
         </button>
       </div>
 
       {/* Empty state */}
       {suppliers.length === 0 ? (
-        <div className="bg-white border border-dashed border-[#E5E7EB] rounded-xl p-16 text-center flex flex-col items-center">
-          <Truck className="w-12 h-12 text-[#9CA3AF] mb-4" />
-          <h3 className="font-heading font-semibold text-[#111827] text-lg">Sin proveedores todavía</h3>
-          <p className="text-[15px] text-[#6B7280] mt-2 mb-6 max-w-sm mx-auto">
+        <div className="bg-white border border-[#E5E7EB] rounded-xl py-16 px-6 text-center flex flex-col items-center">
+          <div className="w-11 h-11 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] flex items-center justify-center mb-3">
+            <Truck className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+          </div>
+          <h3 className="text-[15px] font-medium text-[#111827]">Sin proveedores todavía</h3>
+          <p className="text-[14px] text-[#6B7280] mt-1 mb-5 max-w-sm mx-auto">
             Añade proveedores para asociarlos a pedidos de compra.
           </p>
           <button
             onClick={openCreate}
-            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97]"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
             Añadir primer proveedor
           </button>
         </div>
@@ -160,12 +162,12 @@ export function SuppliersClient({ suppliers }: SuppliersClientProps) {
               {suppliers.map((s) => (
                 <tr
                   key={s.id}
-                  className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors last:border-0"
+                  className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors duration-150 last:border-0"
                 >
                   <td className="px-5 py-3.5 font-medium text-[#111827]">{s.name}</td>
                   <td className="px-5 py-3.5 text-[#6B7280]">
                     {s.email
-                      ? <a href={`mailto:${s.email}`} className="hover:text-[#0F766E] transition-colors">{s.email}</a>
+                      ? <a href={`mailto:${s.email}`} className="hover:text-[#0F766E] transition-colors duration-150">{s.email}</a>
                       : <span className="text-[#9CA3AF]">—</span>}
                   </td>
                   <td className="px-5 py-3.5 text-[#6B7280]">
@@ -179,21 +181,21 @@ export function SuppliersClient({ suppliers }: SuppliersClientProps) {
                       <button
                         type="button"
                         onClick={() => openEdit(s)}
-                        className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#0F766E] hover:bg-[#CCFBF1] transition-colors"
+                        className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#0F766E] hover:bg-[#CCFBF1] transition-colors duration-150 active:scale-[0.97]"
                         title="Editar"
                       >
-                        <Pencil className="h-3.5 w-3.5" />
+                        <Pencil className="h-3.5 w-3.5" strokeWidth={1.5} />
                       </button>
                       <button
                         type="button"
                         onClick={() => handleDelete(s)}
                         disabled={deletingId === s.id}
-                        className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors disabled:opacity-40"
+                        className="rounded-lg p-1.5 text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.97] disabled:opacity-40 disabled:active:scale-100"
                         title="Eliminar"
                       >
                         {deletingId === s.id
                           ? <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                          : <Trash2 className="h-3.5 w-3.5" />}
+                          : <Trash2 className="h-3.5 w-3.5" strokeWidth={1.5} />}
                       </button>
                     </div>
                   </td>
@@ -291,7 +293,7 @@ export function SuppliersClient({ suppliers }: SuppliersClientProps) {
               type="button"
               onClick={() => setSheetOpen(false)}
               disabled={isPending}
-              className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] disabled:opacity-50"
+              className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               Cancelar
             </button>
@@ -299,7 +301,7 @@ export function SuppliersClient({ suppliers }: SuppliersClientProps) {
               type="submit"
               form="supplier-form"
               disabled={isPending}
-              className="flex-1 inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50"
+              className="flex-1 inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
               {editTarget ? 'Guardar cambios' : 'Crear proveedor'}

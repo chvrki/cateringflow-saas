@@ -122,8 +122,8 @@ export default function SignupPage() {
       <div className="w-full max-w-md">
         <div className="flex justify-center mb-8">
           <Link href="/" className="flex items-center gap-2">
-            <ChefHat className="h-8 w-8 text-[#0F766E]" />
-            <span className="text-2xl font-bold text-[#111827]">
+            <ChefHat className="h-8 w-8 text-[#0F766E]" strokeWidth={1.5} />
+            <span className="text-2xl font-semibold text-[#111827]">
               Caterix
             </span>
           </Link>
@@ -132,7 +132,7 @@ export default function SignupPage() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl">
-              <UserPlus className="h-5 w-5 text-[#0F766E]" />
+              <UserPlus className="h-5 w-5 text-[#0F766E]" strokeWidth={1.5} />
               Crear cuenta
             </CardTitle>
             <CardDescription>
@@ -154,7 +154,7 @@ export default function SignupPage() {
                       <FormLabel>Tu nombre</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
+                          <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" strokeWidth={1.5} />
                           <Input
                             placeholder="María García"
                             className="pl-9"
@@ -175,7 +175,7 @@ export default function SignupPage() {
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" strokeWidth={1.5} />
                           <Input
                             type="email"
                             placeholder="tu@catering.com"
@@ -198,7 +198,7 @@ export default function SignupPage() {
                       <FormLabel>Contraseña</FormLabel>
                       <FormControl>
                         <div className="relative">
-                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" />
+                          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9CA3AF]" strokeWidth={1.5} />
                           <Input
                             type="password"
                             placeholder="Mínimo 8 caracteres"
@@ -220,7 +220,7 @@ export default function SignupPage() {
                 >
                   {isSubmitting ? (
                     <>
-                      <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                      <Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />
                       Creando cuenta...
                     </>
                   ) : (
@@ -245,12 +245,12 @@ export default function SignupPage() {
             >
               {isGoogleLoading ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                  <Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />
                   Conectando con Google...
                 </>
               ) : (
                 <>
-                  <Chrome className="h-4 w-4 mr-2" />
+                  <Chrome className="h-4 w-4 mr-2" strokeWidth={1.5} />
                   Continuar con Google
                 </>
               )}

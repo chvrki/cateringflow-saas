@@ -7,8 +7,24 @@ const CalendarView = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="animate-pulse rounded-xl bg-[#F8FAFC] h-[680px] w-full flex items-center justify-center border border-[#E5E7EB]">
-        <span className="text-[#9CA3AF] text-[15px]">Cargando calendario...</span>
+      <div className="rounded-xl bg-white border border-[#E5E7EB] h-[680px] w-full p-6 overflow-hidden">
+        <div className="flex items-center justify-between mb-6">
+          <div className="h-6 w-40 rounded-md bg-[#F8FAFC] animate-pulse" />
+          <div className="flex gap-2">
+            <div className="h-9 w-9 rounded-lg bg-[#F8FAFC] animate-pulse" />
+            <div className="h-9 w-9 rounded-lg bg-[#F8FAFC] animate-pulse" />
+            <div className="h-9 w-24 rounded-lg bg-[#F8FAFC] animate-pulse" />
+          </div>
+        </div>
+        <div className="grid grid-cols-7 gap-2">
+          {Array.from({ length: 35 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-20 rounded-lg bg-[#F8FAFC] animate-pulse"
+              style={{ animationDelay: `${(i % 7) * 60}ms` }}
+            />
+          ))}
+        </div>
       </div>
     ),
   }

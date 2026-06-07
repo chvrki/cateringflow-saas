@@ -12,6 +12,7 @@ import {
   FileText,
   Mail,
   MoreVertical,
+  Plus,
   Send,
   Trash2,
 } from 'lucide-react'
@@ -221,7 +222,7 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
             placeholder="Buscar por cliente, email o evento..."
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            className="w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors"
+            className="w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors duration-150"
           />
         </div>
 
@@ -232,10 +233,10 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
               type="button"
               onClick={() => setActiveFilter(tab.key)}
               className={cn(
-                'px-4 py-2 text-[15px] rounded-lg font-medium transition-colors',
+                'px-4 py-2 text-[14px] rounded-lg font-medium transition-colors duration-150 active:scale-[0.97]',
                 activeFilter === tab.key
                   ? 'bg-[#0F766E] text-white hover:bg-[#115E59]'
-                  : 'bg-white border border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAFC]',
+                  : 'bg-white border border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB]',
               )}
             >
               {tab.label}
@@ -249,18 +250,23 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
       </h2>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-20 bg-white border border-[#E5E7EB] rounded-xl">
-          <FileText className="w-12 h-12 mx-auto text-[#9CA3AF] mb-4" />
-          <p className="font-heading font-semibold text-[#111827]">
-            Sin presupuestos todavia
+        <div className="text-center py-16 px-6 bg-white border border-[#E5E7EB] rounded-xl flex flex-col items-center">
+          <div className="w-11 h-11 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] flex items-center justify-center mb-3">
+            <FileText className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+          </div>
+          <p className="text-[15px] font-medium text-[#111827]">
+            {search || activeFilter !== 'all' ? 'Sin resultados' : 'Sin presupuestos todavía'}
           </p>
-          <p className="text-[15px] text-[#6B7280] mt-1">
-            Crea tu primer presupuesto y enviaselo a un cliente.
+          <p className="text-[14px] text-[#6B7280] mt-1 mb-5">
+            {search || activeFilter !== 'all'
+              ? 'Prueba a cambiar los filtros o el término de búsqueda.'
+              : 'Crea tu primer presupuesto y envíaselo a un cliente.'}
           </p>
           <Link
             href="/dashboard/quotes/new"
-            className="inline-flex items-center gap-2 mt-6 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[14px] transition-colors duration-150 active:scale-[0.97]"
           >
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
             Crear presupuesto
           </Link>
         </div>
@@ -312,14 +318,14 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
 
                     {quote.event_date && (
                       <div className="flex items-center gap-1.5 text-[13px] text-[#9CA3AF] mt-1">
-                        <Calendar className="h-3.5 w-3.5 shrink-0" />
+                        <Calendar className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
                         {formatDate(quote.event_date)}
                       </div>
                     )}
 
                     {quote.client_email && (
                       <div className="flex items-center gap-1.5 text-[13px] text-[#9CA3AF] mt-1">
-                        <Mail className="h-3.5 w-3.5 shrink-0" />
+                        <Mail className="h-3.5 w-3.5 shrink-0" strokeWidth={1.5} />
                         <span className="lowercase truncate">
                           {quote.client_email}
                         </span>
@@ -333,7 +339,7 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                           expired ? 'text-[#DC2626]' : 'text-[#9CA3AF]',
                         )}
                       >
-                        <Clock className="h-3 w-3 shrink-0" />
+                        <Clock className="h-3 w-3 shrink-0" strokeWidth={1.5} />
                         Valido hasta: {formatDate(quote.valid_until)}
                         {expired && ' · Expirado'}
                       </div>
@@ -346,10 +352,10 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                         <button
                           type="button"
                           disabled={busy}
-                          className="rounded-lg border border-[#E5E7EB] bg-white p-2 text-[#6B7280] hover:bg-[#F8FAFC] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 disabled:opacity-50 transition-colors"
+                          className="rounded-lg border border-[#E5E7EB] bg-white p-2 text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
                           aria-label="Acciones del presupuesto"
                         >
-                          <MoreVertical className="h-4 w-4" />
+                          <MoreVertical className="h-4 w-4" strokeWidth={1.5} />
                         </button>
                       </DropdownMenuTrigger>
 
@@ -363,7 +369,7 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                             router.push(`/dashboard/quotes/${quote.id}`)
                           }
                         >
-                          <FileText className="h-4 w-4" />
+                          <FileText className="h-4 w-4" strokeWidth={1.5} />
                           Ver
                         </DropdownMenuItem>
                         <DropdownMenuItem
@@ -373,14 +379,14 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                             router.push(`/dashboard/quotes/${quote.id}`)
                           }
                         >
-                          <Edit3 className="h-4 w-4" />
+                          <Edit3 className="h-4 w-4" strokeWidth={1.5} />
                           Editar
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           className="cursor-pointer"
                           onSelect={() => downloadPdf(quote)}
                         >
-                          <FileDown className="h-4 w-4" />
+                          <FileDown className="h-4 w-4" strokeWidth={1.5} />
                           PDF
                         </DropdownMenuItem>
                         <DropdownMenuItem
@@ -388,7 +394,7 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                           className="cursor-pointer"
                           onSelect={() => copyPublicLink(quote)}
                         >
-                          <Copy className="h-4 w-4" />
+                          <Copy className="h-4 w-4" strokeWidth={1.5} />
                           Copiar enlace
                         </DropdownMenuItem>
 
@@ -399,7 +405,7 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                           className="cursor-pointer"
                           onSelect={() => handleSend(quote)}
                         >
-                          <Send className="h-4 w-4" />
+                          <Send className="h-4 w-4" strokeWidth={1.5} />
                           Enviar
                         </DropdownMenuItem>
                         <DropdownMenuItem
@@ -413,7 +419,7 @@ export function ClientQuotes({ quotes }: { quotes: Quote[] }) {
                           className="cursor-pointer text-[#DC2626] focus:text-[#DC2626]"
                           onSelect={() => handleDelete(quote)}
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                           Eliminar
                         </DropdownMenuItem>
                       </DropdownMenuContent>

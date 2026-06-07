@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Plus, Eye } from 'lucide-react'
+import { Plus, Eye, ClipboardList } from 'lucide-react'
 import { Pagination } from '@/app/dashboard/_components/Pagination'
 import type { OrderRow } from './page'
 
@@ -46,7 +46,7 @@ export function OrdersClient({ orders, totalPages, currentPage, statusFilter }: 
             <button
               key={f.value}
               onClick={() => setStatus(f.value)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors duration-150 active:scale-[0.97] ${
                 statusFilter === f.value
                   ? 'bg-[#0F766E] text-white'
                   : 'bg-white border border-[#E5E7EB] text-[#6B7280] hover:border-[#0F766E] hover:text-[#0F766E]'
@@ -59,24 +59,30 @@ export function OrdersClient({ orders, totalPages, currentPage, statusFilter }: 
 
         <Link
           href="/dashboard/orders/new"
-          className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+          className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97]"
         >
-          <Plus className="h-4 w-4" />
+          <Plus className="h-4 w-4" strokeWidth={1.5} />
           Nuevo pedido
         </Link>
       </div>
 
       {/* Empty state */}
       {orders.length === 0 ? (
-        <div className="bg-white border border-dashed border-[#E5E7EB] rounded-xl p-16 text-center flex flex-col items-center">
-          <p className="text-[#9CA3AF] text-[15px] mb-4">
-            No hay pedidos{statusFilter ? ' con este estado' : ''}.
+        <div className="bg-white border border-[#E5E7EB] rounded-xl py-16 px-6 text-center flex flex-col items-center">
+          <div className="w-11 h-11 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] flex items-center justify-center mb-3">
+            <ClipboardList className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+          </div>
+          <p className="text-[15px] font-medium text-[#111827]">
+            No hay pedidos{statusFilter ? ' con este estado' : ''}
+          </p>
+          <p className="text-[14px] text-[#6B7280] mt-1 mb-5">
+            Crea un pedido para empezar a gestionar tus compras a proveedores.
           </p>
           <Link
             href="/dashboard/orders/new"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] px-4 py-2 text-[14px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97]"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
             Crear primer pedido
           </Link>
         </div>
@@ -98,7 +104,7 @@ export function OrdersClient({ orders, totalPages, currentPage, statusFilter }: 
                 return (
                   <tr
                     key={o.id}
-                    className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors last:border-0"
+                    className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors duration-150 last:border-0"
                   >
                     <td className="px-5 py-3.5 font-medium text-[#111827]">
                       {o.suppliers?.name ?? <span className="text-[#9CA3AF]">—</span>}
@@ -125,9 +131,9 @@ export function OrdersClient({ orders, totalPages, currentPage, statusFilter }: 
                       <Link href={`/dashboard/orders/${o.id}`}>
                         <button
                           type="button"
-                          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#111827] border border-[#E5E7EB] hover:border-[#0F766E] hover:text-[#0F766E] transition-colors"
+                          className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#111827] border border-[#E5E7EB] hover:border-[#0F766E] hover:text-[#0F766E] transition-colors duration-150 active:scale-[0.97]"
                         >
-                          <Eye className="h-3.5 w-3.5" />
+                          <Eye className="h-3.5 w-3.5" strokeWidth={1.5} />
                           Ver
                         </button>
                       </Link>

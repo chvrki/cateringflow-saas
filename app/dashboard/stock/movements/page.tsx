@@ -81,18 +81,18 @@ export default async function MovementsPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen w-full">
       <div className="max-w-7xl mx-auto px-8 py-8">
-        <div className="mb-8">
+        <div className="mb-10">
           <Link
             href="/dashboard/stock"
-            className="inline-flex items-center gap-1.5 text-[15px] text-[#6B7280] hover:text-[#0F766E] transition-colors mb-3"
+            className="inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#0F766E] transition-colors duration-150 mb-3"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
+            <ArrowLeft className="h-3.5 w-3.5" strokeWidth={1.5} />
             Volver al stock
           </Link>
-          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
             Historial de movimientos
           </h1>
-          <p className="text-[15px] text-[#6B7280] mt-1">
+          <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
             Registro completo de entradas, salidas y ajustes de inventario.
           </p>
         </div>

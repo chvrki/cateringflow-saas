@@ -116,6 +116,7 @@
   border-radius: 4px !important;
   font-size: 12px !important;
   font-weight: 500 !important;
+  transition: opacity 0.15s, background-color 0.15s;
 }
 
 .fc .fc-event:hover {
@@ -179,6 +180,7 @@
   font-size: 0.75rem !important;
   color: #6B7280 !important;
   font-weight: 500 !important;
+  transition: color 0.15s;
 }
 
 .fc-daygrid-more-link:hover {

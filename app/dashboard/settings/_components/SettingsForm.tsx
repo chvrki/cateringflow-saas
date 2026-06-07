@@ -53,7 +53,7 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
   }
 
   const inputClass =
-    'w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors'
+    'w-full bg-white border border-[#E5E7EB] rounded-lg px-4 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors duration-150'
   const fieldLabelClass =
     'text-[11px] font-semibold uppercase tracking-widest text-[#6B7280] mb-1.5 block'
 
@@ -110,11 +110,11 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
                 />
               ) : (
                 <div className="w-16 h-16 rounded-lg border border-[#E5E7EB] object-contain bg-[#F8FAFC] p-1 flex items-center justify-center">
-                  <Upload className="w-4 h-4 text-[#9CA3AF]" />
+                  <Upload className="w-4 h-4 text-[#9CA3AF]" strokeWidth={1.5} />
                 </div>
               )}
               <div className="min-w-0">
-                <label className="inline-flex items-center border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] cursor-pointer transition-colors">
+                <label className="inline-flex items-center border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[15px] cursor-pointer transition-colors duration-150 active:scale-[0.97]">
                   Seleccionar archivo
                   <input
                     type="file"
@@ -141,9 +141,9 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
             <button
               type="submit"
               disabled={isPending}
-              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
-              <Save size={16} />
+              <Save className="h-4 w-4" strokeWidth={1.5} />
               Guardar configuración
             </button>
           </div>
@@ -174,7 +174,7 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
           <div className="bg-[#CCFBF1] border border-[#0F766E]/20 rounded-xl p-5 flex items-center justify-between gap-4 flex-col sm:flex-row">
             <div>
               <h3 className="text-[15px] font-semibold text-[#111827] flex items-center gap-2">
-                <Zap className="text-[#0F766E] w-5 h-5" />
+                <Zap className="text-[#0F766E] w-5 h-5" strokeWidth={1.5} />
                 Desbloquea recursos ilimitados
               </h3>
               <p className="text-[15px] text-[#6B7280] mt-1 max-w-lg">
@@ -185,7 +185,7 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
               type="button"
               onClick={() => handleAction(createCheckoutSession)}
               disabled={isPending}
-              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white px-5 py-2.5 text-[15px] font-medium whitespace-nowrap transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white px-5 py-2.5 text-[15px] font-medium whitespace-nowrap transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               Actualizar a Pro
             </button>
@@ -194,7 +194,7 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
           <div className="flex items-center justify-between gap-4 flex-col sm:flex-row">
             <div>
               <p className="text-[15px] font-semibold text-[#111827] flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-[#16A34A]" />
+                <CheckCircle className="w-5 h-5 text-[#16A34A]" strokeWidth={1.5} />
                 Plan Pro activo
               </p>
               <p className="text-[15px] text-[#6B7280] mt-1">
@@ -205,7 +205,7 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
               type="button"
               onClick={() => handleAction(createPortalSession)}
               disabled={isPending}
-              className="border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors disabled:opacity-50"
+              className="border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               Gestionar suscripción
             </button>
@@ -263,7 +263,7 @@ export function SettingsForm({ tenant }: { tenant: Tenant }) {
           </div>
           <button
             type="button"
-            className="border border-[#DC2626]/20 text-[#DC2626] hover:bg-[#FEE2E2] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors"
+            className="border border-[#DC2626]/20 text-[#DC2626] hover:bg-[#FEE2E2] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors duration-150 active:scale-[0.97]"
           >
             Eliminar cuenta
           </button>

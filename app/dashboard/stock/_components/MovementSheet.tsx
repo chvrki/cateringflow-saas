@@ -193,10 +193,10 @@ export function MovementSheet({
                             type="button"
                             onClick={() => handleTypeChange(t)}
                             className={cn(
-                              'flex-1 py-2 rounded-lg text-[15px] font-medium border transition-colors duration-150',
+                              'flex-1 py-2 rounded-lg text-[15px] font-medium border transition-colors duration-150 active:scale-[0.97]',
                               field.value === t
                                 ? 'bg-[#0F766E] border-[#0F766E] text-white'
-                                : 'bg-white border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAFC]'
+                                : 'bg-white border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB]'
                             )}
                           >
                             {TYPE_LABELS[t]}
@@ -346,14 +346,14 @@ export function MovementSheet({
                 type="button"
                 onClick={onClose}
                 disabled={isPending}
-                className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] disabled:opacity-50"
+                className="flex-1 inline-flex items-center justify-center rounded-lg border border-[#E5E7EB] bg-white px-4 py-2 text-[15px] font-medium text-[#111827] hover:bg-[#F8FAFC] hover:border-[#D1D5DB] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={isPending}
-                className="flex-1 inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] disabled:opacity-50"
+                className="flex-1 inline-flex items-center justify-center rounded-lg bg-[#0F766E] px-4 py-2 text-[15px] font-medium text-white hover:bg-[#115E59] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
               >
                 {isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
                 {isAdjustMode ? 'Guardar ajuste' : 'Registrar'}

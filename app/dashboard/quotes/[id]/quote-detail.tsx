@@ -45,7 +45,7 @@ const STATUS_MAP: Record<Quote['status'], { label: string; cls: string }> = {
 const fieldLabel =
   'text-[11px] font-semibold uppercase tracking-widest text-[#6B7280] mb-1.5 block'
 const inputClass =
-  'w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors'
+  'w-full bg-white border border-[#E5E7EB] rounded-lg px-3 py-2 text-[15px] text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus-visible:border-[#0F766E] focus-visible:ring-2 focus-visible:ring-[#0F766E]/20 transition-colors duration-150'
 
 function formatDate(iso: string | null) {
   if (!iso) return '-'
@@ -89,7 +89,7 @@ function TimelineItem({
             : 'bg-white border-[#E5E7EB] text-[#9CA3AF]',
         )}
       >
-        <CheckCircle2 className="h-4 w-4" />
+        <CheckCircle2 className="h-4 w-4" strokeWidth={1.5} />
       </div>
       <div>
         <p className="text-[15px] font-semibold text-[#111827]">{label}</p>
@@ -148,11 +148,11 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
 
   const copyLink = async () => {
     if (!publicLink) {
-      toast.error('Este presupuesto no tiene enlace publico')
+      toast.error('Este presupuesto no tiene enlace público')
       return
     }
     await navigator.clipboard.writeText(publicLink)
-    toast.success('Enlace publico copiado')
+    toast.success('Enlace público copiado')
   }
 
   const downloadPdf = async () => {
@@ -177,22 +177,22 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-10">
         <div>
-          <div className="flex items-center gap-1.5 text-[15px] mb-2">
+          <div className="flex items-center gap-1.5 text-[14px] mb-2">
             <Link
               href="/dashboard/quotes"
-              className="text-[#0F766E] hover:text-[#115E59] font-medium transition-colors"
+              className="text-[#0F766E] hover:text-[#115E59] font-medium transition-colors duration-150"
             >
               Presupuestos
             </Link>
-            <ChevronRight className="h-3.5 w-3.5 text-[#9CA3AF]" />
+            <ChevronRight className="h-3.5 w-3.5 text-[#9CA3AF]" strokeWidth={1.5} />
             <span className="text-[#111827] font-medium">
               {quote.client_name}
             </span>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">
+            <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">
               Presupuesto
             </h1>
             <span
@@ -204,8 +204,8 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
               {status.label}
             </span>
           </div>
-          <p className="text-[15px] text-[#6B7280] mt-1">
-            {quote.menu_name ?? 'Sin menu'} · {quote.guests ?? 0} pax ·{' '}
+          <p className="text-[15px] text-[#6B7280] mt-1.5 leading-relaxed">
+            {quote.menu_name ?? 'Sin menú'} · {quote.guests ?? 0} pax ·{' '}
             {formatCurrency(quote.total ?? 0)}
           </p>
         </div>
@@ -215,9 +215,9 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
             <button
               type="button"
               onClick={() => setEditing((value) => !value)}
-              className="border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors"
+              className="border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.97]"
             >
-              {editing ? 'Cancelar edicion' : 'Editar'}
+              {editing ? 'Cancelar edición' : 'Editar'}
             </button>
           )}
           {['draft', 'sent'].includes(quote.status) && (
@@ -231,12 +231,12 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
                   error: 'No se pudo enviar el presupuesto',
                 })
               }
-              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[14px] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
             >
               {isPending ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
-                <Send className="h-4 w-4" />
+                <Send className="h-4 w-4" strokeWidth={1.5} />
               )}
               Enviar
             </button>
@@ -249,13 +249,13 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
           <form action={handleUpdate} className="bg-white border border-[#E5E7EB] rounded-xl p-6">
             <div className="flex items-center justify-between gap-4 mb-5">
               <h2 className="font-heading text-[17px] font-semibold text-[#111827]">
-                Informacion completa
+                Información completa
               </h2>
               {editing && (
                 <button
                   type="submit"
                   disabled={isPending}
-                  className="rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[15px] transition-colors disabled:opacity-50"
+                  className="rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium px-4 py-2 text-[14px] transition-colors duration-150 active:scale-[0.97] disabled:opacity-50 disabled:active:scale-100"
                 >
                   Guardar cambios
                 </button>
@@ -291,7 +291,7 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
                 </div>
                 <div>
                   <label htmlFor="client_phone" className={fieldLabel}>
-                    Telefono
+                    Teléfono
                   </label>
                   <input
                     id="client_phone"
@@ -340,7 +340,7 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
                 </div>
                 <div className="sm:col-span-2">
                   <label htmlFor="location" className={fieldLabel}>
-                    Ubicacion
+                    Ubicación
                   </label>
                   <input
                     id="location"
@@ -351,7 +351,7 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
                 </div>
                 <div>
                   <label htmlFor="valid_until" className={fieldLabel}>
-                    Valido hasta
+                    Válido hasta
                   </label>
                   <input
                     id="valid_until"
@@ -405,15 +405,15 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <InfoRow label="Cliente" value={quote.client_name} />
                 <InfoRow label="Email" value={quote.client_email} />
-                <InfoRow label="Telefono" value={quote.client_phone} />
+                <InfoRow label="Teléfono" value={quote.client_phone} />
                 <InfoRow label="Tipo de evento" value={quote.event_type} />
                 <InfoRow label="Fecha del evento" value={formatDate(quote.event_date)} />
                 <InfoRow label="Personas" value={quote.guests} />
                 <div className="sm:col-span-2">
-                  <InfoRow label="Ubicacion" value={quote.location} />
+                  <InfoRow label="Ubicación" value={quote.location} />
                 </div>
-                <InfoRow label="Valido hasta" value={formatDate(quote.valid_until)} />
-                <InfoRow label="Menu" value={quote.menu_name} />
+                <InfoRow label="Válido hasta" value={formatDate(quote.valid_until)} />
+                <InfoRow label="Menú" value={quote.menu_name} />
               </div>
             )}
           </form>
@@ -508,7 +508,7 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
 
           <div className="bg-white border border-[#E5E7EB] rounded-xl p-6">
             <h2 className="font-heading text-[15px] font-semibold text-[#111827] mb-4">
-              Enlace publico
+              Enlace público
             </h2>
             <div className="rounded-lg border border-[#E5E7EB] bg-[#F8FAFC] px-3 py-2 text-[13px] text-[#6B7280] break-all">
               {publicLink || 'Sin enlace disponible'}
@@ -516,9 +516,9 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
             <button
               type="button"
               onClick={copyLink}
-              className="mt-3 w-full inline-flex items-center justify-center gap-2 border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors"
+              className="mt-3 w-full inline-flex items-center justify-center gap-2 border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.98]"
             >
-              <Copy className="h-4 w-4" />
+              <Copy className="h-4 w-4" strokeWidth={1.5} />
               Copiar enlace
             </button>
           </div>
@@ -531,16 +531,16 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
               <button
                 type="button"
                 onClick={downloadPdf}
-                className="w-full inline-flex items-center justify-center gap-2 border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.98]"
               >
-                <FileText className="h-4 w-4" />
+                <FileText className="h-4 w-4" strokeWidth={1.5} />
                 Descargar PDF
               </button>
               <a
                 href={`mailto:${quote.client_email ?? ''}`}
-                className="w-full inline-flex items-center justify-center gap-2 border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.98]"
               >
-                <Mail className="h-4 w-4" />
+                <Mail className="h-4 w-4" strokeWidth={1.5} />
                 Email cliente
               </a>
               <button
@@ -553,7 +553,7 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
                     error: 'No se pudo duplicar el presupuesto',
                   })
                 }
-                className="w-full border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] text-[#111827] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors disabled:opacity-50"
+                className="w-full border border-[#E5E7EB] bg-white hover:bg-[#F8FAFC] hover:border-[#D1D5DB] text-[#111827] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100"
               >
                 Duplicar
               </button>
@@ -563,22 +563,22 @@ export function QuoteDetail({ quote }: { quote: Quote }) {
                   isPending || !['draft', 'rejected', 'expired'].includes(quote.status)
                 }
                 onClick={() => {
-                  if (!confirm('Eliminar este presupuesto?')) return
+                  if (!confirm('¿Eliminar este presupuesto?')) return
                   runAction(() => deleteQuote(quote.id), {
                     loading: 'Eliminando presupuesto...',
                     success: 'Presupuesto eliminado',
                     error: 'No se pudo eliminar el presupuesto',
                   })
                 }}
-                className="w-full inline-flex items-center justify-center gap-2 border border-[#DC2626]/20 bg-white hover:bg-[#FEE2E2] text-[#DC2626] rounded-lg px-4 py-2 text-[15px] font-medium transition-colors disabled:opacity-50"
+                className="w-full inline-flex items-center justify-center gap-2 border border-[#DC2626]/20 bg-white hover:bg-[#FEE2E2] text-[#DC2626] rounded-lg px-4 py-2 text-[14px] font-medium transition-colors duration-150 active:scale-[0.98] disabled:opacity-50 disabled:active:scale-100"
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="h-4 w-4" strokeWidth={1.5} />
                 Eliminar
               </button>
             </div>
             <p className="flex items-center gap-1 text-[13px] text-[#9CA3AF] mt-4">
-              <Clock className="h-3 w-3 shrink-0" />
-              Ultima actualizacion: {formatDate(quote.updated_at)}
+              <Clock className="h-3 w-3 shrink-0" strokeWidth={1.5} />
+              Última actualización: {formatDate(quote.updated_at)}
             </p>
           </div>
         </aside>

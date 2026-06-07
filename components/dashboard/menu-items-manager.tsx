@@ -201,9 +201,9 @@ export function MenuItemsManager({
       <div className="max-w-3xl mx-auto space-y-6">
         <Link
           href={`/dashboard/menus/${menu.id}`}
-          className="inline-flex items-center text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors"
+          className="group inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors duration-150"
         >
-          <ArrowLeft className="h-4 w-4 mr-1" />
+          <ArrowLeft className="h-4 w-4 transition-transform duration-150 ease-out group-hover:-translate-x-0.5" strokeWidth={1.5} />
           Volver al menú
         </Link>
 
@@ -241,9 +241,9 @@ export function MenuItemsManager({
           <Button
             type="button"
             onClick={openNew}
-            className="rounded-lg bg-[#0F766E] text-white hover:bg-[#115E59] font-medium gap-2 w-fit"
+            className="rounded-lg bg-[#0F766E] text-white hover:bg-[#115E59] font-medium gap-2 w-fit transition-colors duration-150 active:scale-[0.97]"
           >
-            <Plus className="h-4 w-4" />
+            <Plus className="h-4 w-4" strokeWidth={1.5} />
             Añadir plato
           </Button>
         </div>
@@ -315,10 +315,10 @@ export function MenuItemsManager({
                       type="button"
                       onClick={() => toggleAllergen(a.id)}
                       className={cn(
-                        'px-2 py-1 text-xs rounded-md border transition-colors',
+                        'px-2 py-1 text-xs rounded-md border transition-colors duration-150 active:scale-[0.96]',
                         form.allergens.includes(a.id)
                           ? 'bg-[#FEE2E2] border-[#FCA5A5] text-[#DC2626]'
-                          : 'bg-white border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAFC]',
+                          : 'bg-white border-[#E5E7EB] text-[#6B7280] hover:bg-[#F8FAFC] hover:border-[#D1D5DB]',
                       )}
                     >
                       {a.emoji} {a.label}
@@ -333,7 +333,7 @@ export function MenuItemsManager({
                 <Button
                   type="button"
                   variant="outline"
-                  className="rounded-lg border border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC]"
+                  className="rounded-lg border border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] transition-colors duration-150 active:scale-[0.97]"
                 >
                   Cancelar
                 </Button>
@@ -342,11 +342,11 @@ export function MenuItemsManager({
                 type="button"
                 onClick={handleSave}
                 disabled={saving || !form.name.trim()}
-                className="rounded-lg bg-[#0F766E] text-white hover:bg-[#115E59] font-medium"
+                className="rounded-lg bg-[#0F766E] text-white hover:bg-[#115E59] font-medium transition-colors duration-150 active:scale-[0.97] disabled:active:scale-100"
               >
                 {saving ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />
                     Guardando…
                   </>
                 ) : (
@@ -358,11 +358,23 @@ export function MenuItemsManager({
         </Sheet>
 
         {items.length === 0 ? (
-          <div className="text-center py-16 bg-white border border-[#E5E7EB] rounded-xl">
-            <UtensilsCrossed className="h-12 w-12 mx-auto text-[#9CA3AF] mb-4" />
-            <p className="text-sm text-[#6B7280] font-medium">
-              Añade el primer plato
-            </p>
+          <div className="flex flex-col items-center justify-center text-center gap-3 py-16 bg-white border border-[#E5E7EB] rounded-xl">
+            <span className="flex items-center justify-center h-12 w-12 rounded-full bg-[#F8FAFC]">
+              <UtensilsCrossed className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+            </span>
+            <div>
+              <p className="text-[14px] font-medium text-[#111827]">Este menú aún no tiene platos</p>
+              <p className="text-[13px] text-[#6B7280] mt-1">Empieza añadiendo el primer plato a la carta.</p>
+            </div>
+            <Button
+              type="button"
+              onClick={openNew}
+              variant="outline"
+              className="rounded-lg border-[#E5E7EB] bg-white text-[#111827] hover:bg-[#F8FAFC] font-medium gap-2 mt-1 transition-colors duration-150 active:scale-[0.97]"
+            >
+              <Plus className="h-4 w-4" strokeWidth={1.5} />
+              Añadir plato
+            </Button>
           </div>
         ) : (
           <div className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden">
@@ -370,10 +382,10 @@ export function MenuItemsManager({
               {sortedItems.map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-[#F8FAFC] transition-colors"
+                  className="group/row flex items-center gap-3 px-4 py-3 hover:bg-[#F8FAFC] transition-colors duration-150"
                 >
                   <GripVertical
-                    className="h-4 w-4 text-[#9CA3AF] shrink-0 cursor-grab"
+                    className="h-4 w-4 text-[#D1D5DB] group-hover/row:text-[#9CA3AF] shrink-0 cursor-grab transition-colors duration-150"
                     aria-hidden
                   />
                   <div className="flex-1 min-w-0">
@@ -400,16 +412,16 @@ export function MenuItemsManager({
                     <button
                       type="button"
                       onClick={() => openEdit(item)}
-                      className="p-2 rounded-lg text-[#9CA3AF] hover:text-[#0F766E] hover:bg-[#CCFBF1] transition-colors"
+                      className="p-2 rounded-lg text-[#9CA3AF] hover:text-[#0F766E] hover:bg-[#CCFBF1] transition-colors duration-150 active:scale-[0.94]"
                       aria-label="Editar plato"
                     >
-                      <Edit2 className="h-4 w-4" />
+                      <Edit2 className="h-4 w-4" strokeWidth={1.5} />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleDelete(item.id)}
                       disabled={deleting === item.id}
-                      className="p-2 rounded-lg text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors disabled:opacity-50"
+                      className="p-2 rounded-lg text-[#9CA3AF] hover:text-[#DC2626] hover:bg-[#FEE2E2] transition-colors duration-150 active:scale-[0.94] disabled:opacity-50 disabled:active:scale-100"
                       aria-label="Eliminar plato"
                     >
                       {deleting === item.id ? (

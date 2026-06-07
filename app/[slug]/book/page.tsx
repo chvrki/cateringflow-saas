@@ -22,7 +22,7 @@ export default async function PublicBookingPage({ params }: { params: Params }) 
     return (
       <div className="bg-[#F8FAFC] min-h-screen flex items-center justify-center px-6">
         <div className="text-center">
-          <AlertCircle className="w-12 h-12 text-[#D97706] mx-auto" />
+          <AlertCircle className="w-12 h-12 text-[#D97706] mx-auto" strokeWidth={1.5} />
           <h1 className="mt-4 font-heading text-xl font-semibold text-[#111827]">
             Página no encontrada
           </h1>
@@ -69,7 +69,7 @@ export default async function PublicBookingPage({ params }: { params: Params }) 
 
       <main className="max-w-2xl mx-auto px-4 py-10">
         <div className="mb-8 text-center space-y-2">
-          <h2 className="font-heading text-3xl font-bold text-[#111827] leading-tight">
+          <h2 className="font-heading text-3xl font-semibold text-[#111827] leading-tight">
             Haz tu reserva
           </h2>
           <p className="text-base text-[#6B7280] max-w-md mx-auto leading-relaxed">

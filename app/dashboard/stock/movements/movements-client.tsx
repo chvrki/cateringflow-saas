@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { X } from 'lucide-react'
+import { X, Inbox } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   Select,
@@ -157,9 +157,9 @@ export function MovementsClient({
         {hasFilters && (
           <button
             onClick={clearFilters}
-            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[15px] text-[#6B7280] hover:text-[#111827] hover:bg-[#F8FAFC] transition-colors"
+            className="inline-flex items-center gap-1.5 h-9 px-3 rounded-lg text-[14px] font-medium text-[#6B7280] hover:text-[#111827] hover:bg-[#F8FAFC] transition-colors duration-150 active:scale-[0.97]"
           >
-            <X className="h-3.5 w-3.5" />
+            <X className="h-3.5 w-3.5" strokeWidth={1.5} />
             Limpiar
           </button>
         )}
@@ -182,17 +182,27 @@ export function MovementsClient({
           <tbody>
             {movements.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-6 py-12 text-center text-[15px] text-[#9CA3AF]">
-                  {hasFilters
-                    ? 'No hay movimientos con los filtros aplicados.'
-                    : 'Aún no hay movimientos registrados.'}
+                <td colSpan={7} className="px-6 py-16 text-center">
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="w-11 h-11 rounded-full bg-[#F8FAFC] border border-[#E5E7EB] flex items-center justify-center mb-2">
+                      <Inbox className="h-5 w-5 text-[#9CA3AF]" strokeWidth={1.5} />
+                    </div>
+                    <p className="text-[15px] font-medium text-[#111827]">
+                      {hasFilters ? 'Sin resultados' : 'Aún no hay movimientos'}
+                    </p>
+                    <p className="text-[14px] text-[#6B7280]">
+                      {hasFilters
+                        ? 'No hay movimientos con los filtros aplicados.'
+                        : 'Los movimientos de stock aparecerán aquí.'}
+                    </p>
+                  </div>
                 </td>
               </tr>
             ) : (
               movements.map((m) => (
                 <tr
                   key={m.id}
-                  className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors last:border-0"
+                  className="border-b border-[#E5E7EB] hover:bg-[#F8FAFC] transition-colors duration-150 last:border-0"
                 >
                   <td className="px-6 py-4 text-xs text-[#9CA3AF] whitespace-nowrap tabular-nums">
                     {formatDate(m.created_at)}

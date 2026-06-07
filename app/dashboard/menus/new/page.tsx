@@ -7,7 +7,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
-import { Loader2, ArrowLeft, Image as ImageIcon } from 'lucide-react'
+import { Loader2, ArrowLeft, ArrowRight, Image as ImageIcon } from 'lucide-react'
 
 import { createClient } from '@/lib/supabase/client'
 import { type AllergenId } from '@/lib/utils'
@@ -209,18 +209,19 @@ export default function NewMenuPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <Link href="/dashboard/menus">
-          <Button variant="ghost" size="sm">
-            <ArrowLeft className="h-4 w-4 mr-1" />
-            Volver
-          </Button>
+        <Link
+          href="/dashboard/menus"
+          className="group inline-flex items-center gap-1.5 text-[14px] text-[#6B7280] hover:text-[#111827] transition-colors duration-150"
+        >
+          <ArrowLeft className="h-4 w-4 transition-transform duration-150 ease-out group-hover:-translate-x-0.5" strokeWidth={1.5} />
+          Volver
         </Link>
-        <div>
-          <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827]">Nuevo menú</h1>
-          <p className="text-[#6B7280] text-[15px] mt-1">
-            Configura el menú y luego añade los platos
-          </p>
-        </div>
+      </div>
+      <div>
+        <h1 className="font-heading text-[28px] font-semibold tracking-tight text-[#111827] leading-tight">Nuevo menú</h1>
+        <p className="text-[#6B7280] text-[14px] mt-1.5 leading-relaxed">
+          Configura el menú y luego añade los platos.
+        </p>
       </div>
 
       <div className="bg-white border border-[#E5E7EB] rounded-xl p-6">
@@ -401,7 +402,7 @@ export default function NewMenuPage() {
                               />
                             </div>
                             <div className="text-[13px] text-[#6B7280] flex items-center gap-1">
-                              <ImageIcon className="h-3 w-3" />
+                              <ImageIcon className="h-3 w-3" strokeWidth={1.5} />
                               Vista previa de la imagen seleccionada
                             </div>
                           </div>
@@ -420,12 +421,12 @@ export default function NewMenuPage() {
                   <FormItem>
                     <div className="flex items-center justify-between p-4 rounded-xl bg-[#F8FAFC] border border-[#E5E7EB]">
                       <div>
-                        <div className="font-medium text-[#111827]">
+                        <p className="text-[14px] font-medium text-[#111827]">
                           Menú activo
-                        </div>
-                        <div className="text-[15px] text-[#6B7280]">
-                          Los clientes podrán ver y reservar este menú
-                        </div>
+                        </p>
+                        <p className="text-[13px] text-[#6B7280] mt-0.5">
+                          Los clientes podrán ver y reservar este menú.
+                        </p>
                       </div>
                       <FormControl>
                         <Switch
@@ -442,16 +443,19 @@ export default function NewMenuPage() {
 
               <Button
                 type="submit"
-                className="w-full rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white"
+                className="group w-full rounded-lg bg-[#0F766E] hover:bg-[#115E59] text-white font-medium transition-colors duration-150 active:scale-[0.97] disabled:active:scale-100"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                    Guardando...
+                    <Loader2 className="h-4 w-4 animate-spin mr-2" strokeWidth={1.5} />
+                    Guardando…
                   </>
                 ) : (
-                  'Crear menú y añadir platos →'
+                  <>
+                    Crear menú y añadir platos
+                    <ArrowRight className="h-4 w-4 transition-transform duration-150 ease-out group-hover:translate-x-0.5" strokeWidth={1.5} />
+                  </>
                 )}
               </Button>
             </form>
