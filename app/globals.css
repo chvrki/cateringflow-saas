@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-mono: var(--geist-mono-font), monospace;
+
+    /* Caterix design tokens */
+    --color-primary: #0F766E;
+    --color-primary-hover: #115E59;
+    --color-primary-light: #CCFBF1;
+    --color-bg: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-text-primary: #111827;
+    --color-text-secondary: #6B7280;
+    --color-border: #E5E7EB;
+    --color-success: #16A34A;
+    --color-success-light: #DCFCE7;
+    --color-warning: #D97706;
+    --color-warning-light: #FEF3C7;
+    --color-error: #DC2626;
+    --color-error-light: #FEE2E2;
+
+    /* shadcn/ui tokens — HSL, mapped to the palette above */
+    --background: 210 40% 98%;
+    --foreground: 221 39% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 221 39% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 221 39% 11%;
+    --primary: 175 77% 26%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 13% 91%;
+    --secondary-foreground: 221 39% 11%;
+    --muted: 220 13% 91%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 167 85% 89%;
+    --accent-foreground: 175 77% 26%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 175 77% 26%;
+    --radius: 0.5rem;
+
+    --chart-1: 175 77% 26%;
+    --chart-2: 142 76% 36%;
+    --chart-3: 32 95% 44%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 0 72% 51%;
+
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 221 39% 11%;
+    --sidebar-primary: 175 77% 26%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 167 85% 89%;
+    --sidebar-accent-foreground: 175 77% 26%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 175 77% 26%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: #111827;
+    background: #F8FAFC;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+  }
+
+  h1 { font-size: 32px; font-weight: 600; line-height: 1.2; }
+  h2 { font-size: 24px; font-weight: 600; line-height: 1.25; }
+  h3 { font-size: 20px; font-weight: 600; line-height: 1.3; }
+  h4 { font-size: 18px; font-weight: 600; line-height: 1.35; }
+}
+
+@layer components {
+  .btn-primary {
+    background-color: #0F766E;
+    color: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.15s;
+  }
+  .btn-primary:hover {
+    background-color: #115E59;
+  }
+
+  .card {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+}
+
+/* FullCalendar overrides */
+.fc {
+  @apply font-sans;
+}
+.fc .fc-toolbar-title {
+  @apply text-lg font-semibold;
+}
+.fc .fc-button {
+  @apply text-white border-0 rounded-xl px-3 py-1.5 text-sm font-medium;
+  background-color: #0F766E;
+}
+.fc .fc-button:hover {
+  background-color: #115E59;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background-color: #0B4A45;
+}
+.fc-event {
+  @apply cursor-pointer;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #print-area,
+  #print-area * {
+    visibility: visible;
+  }
+
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}

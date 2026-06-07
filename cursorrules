@@ -1,0 +1,216 @@
+# CateringFlow SaaS — Cursor Rules
+
+## Proyecto
+SaaS multi-tenant de gestión de catering. Stack: Next.js 14 (App Router), TypeScript estricto, Supabase, Stripe, Tailwind CSS, Radix UI, React Hook Form + Zod, FullCalendar, @react-pdf/renderer, Resend, Sonner.
+
+---
+
+## Reglas generales
+
+- Usa siempre TypeScript estricto. Sin `any`, sin `as unknown`.
+- Prefiere Server Components por defecto. Solo usa `"use client"` cuando sea estrictamente necesario (interactividad, hooks de estado, eventos).
+- Todos los imports de Supabase en Server Components usan `createServerClient` de `@supabase/ssr`. En Client Components, `createBrowserClient`.
+- Nunca expongas claves privadas de Stripe o Supabase en el cliente.
+- Usa `zod` para validar todos los inputs de formularios y API routes.
+
+---
+
+## Estructura de carpetas
+
+```
+app/
+  (public)/          → rutas públicas (landing, login, signup, onboarding)
+  (dashboard)/       → rutas protegidas del catering admin
+    dashboard/
+      menus/
+      bookings/
+      calendar/
+      settings/
+  [slug]/            → páginas públicas del tenant (reserva online)
+  admin/             → superadmin (plataforma)
+  api/               → API routes y webhooks
+components/
+  ui/                → componentes primitivos reutilizables
+  dashboard/         → componentes específicos del dashboard
+lib/
+  supabase/          → clientes server y browser
+  stripe.ts          → funciones de Stripe
+  utils.ts           → utilidades generales
+types/
+  database.ts        → tipos generados de Supabase
+```
+
+---
+
+## Multi-tenancy
+
+- Cada query a Supabase DEBE filtrar por `tenant_id`. RLS está activo pero el filtro explícito es obligatorio como segunda capa de seguridad.
+- El `tenant_id` se obtiene del JWT (claim custom) o de la cookie `cf_tenant_id`. Nunca del body de la request.
+- La función SQL `my_tenant_id()` está disponible en RLS policies.
+- Un usuario sin `tenant_id` en su perfil → redirigir a `/onboarding`.
+
+---
+
+## Patrones de Supabase
+
+```typescript
+// ✅ Correcto — Server Component
+const supabase = createServerClient(...)
+const { data, error } = await supabase
+  .from('menus')
+  .select('*')
+  .eq('tenant_id', tenantId)  // siempre filtrar por tenant
+  .order('created_at', { ascending: false })
+
+if (error) throw new Error(error.message)
+
+// ❌ Incorrecto — nunca confiar solo en RLS sin filtro explícito
+const { data } = await supabase.from('menus').select('*')
+```
+
+---
+
+## Manejo de errores
+
+- En Server Actions: devuelve `{ error: string } | { data: T }`. Nunca lances excepciones sin capturar.
+- En API routes: responde siempre con `NextResponse.json({ error: '...' }, { status: 4xx/5xx })` en caso de fallo.
+- En el cliente: muestra errores con `toast.error()` de Sonner. Nunca `alert()` o `console.error()` sin feedback visual.
+- Loguea errores de Supabase/Stripe en servidor con contexto suficiente para debugging.
+
+---
+
+## Stripe
+
+- El depósito es siempre el 30% del total (`calculateDeposit()` en `lib/utils.ts`).
+- El pago final es el 70% restante.
+- Toda sesión de Checkout incluye metadata: `booking_id`, `tenant_id`, `payment_type` ('deposit' | 'final').
+- El webhook `/api/webhooks/stripe` es la única fuente de verdad para actualizar estados de pago. Nunca actualices `payments` desde el cliente.
+- Verifica siempre la firma del webhook con `stripe.webhooks.constructEvent()`.
+
+---
+
+## Formularios
+
+```typescript
+// Patrón estándar con React Hook Form + Zod
+const schema = z.object({
+  name: z.string().min(2, 'Mínimo 2 caracteres'),
+  // ...
+})
+type FormData = z.infer<typeof schema>
+
+const form = useForm<FormData>({ resolver: zodResolver(schema) })
+```
+
+- Deshabilita el botón de submit mientras se procesa (`isSubmitting`).
+- Muestra errores inline bajo cada campo, no solo en toast.
+
+---
+
+## UI y estilos
+
+- Design system: colores `stone` y `amber` de Tailwind.
+- Componentes base en `components/ui/` (Button, Card, Input, etc.). Úsalos, no reinventes.
+- Para feedback de acciones: `toast.success()` / `toast.error()` de Sonner.
+- Estados de carga: skeleton loaders, no spinners genéricos.
+- Textos y labels en español (es-ES). Fechas con `Intl.DateTimeFormat('es-ES')`. Moneda con `formatCurrency()` de `lib/utils.ts`.
+
+---
+
+## Alérgenos
+
+- Lista oficial de 14 alérgenos europeos definida en `lib/utils.ts`.
+- Usa siempre `hasAllergenConflict()` para verificar compatibilidad cliente-menú.
+- Muestra alérgenos con emojis + nombre, nunca solo código.
+
+---
+
+## Convenciones de nombres
+
+- Archivos de página: `page.tsx`
+- Layouts: `layout.tsx`
+- Server Actions: `actions.ts` dentro de cada módulo
+- Tipos de base de datos: importar siempre desde `@/types/database`
+- Funciones de utilidad: camelCase, descriptivas (`calculateDeposit`, no `calcDep`)
+
+---
+
+## Lo que NO está implementado aún (no inventar)
+
+- `/dashboard/calendar` — FullCalendar instalado pero sin página
+- `/dashboard/settings` — sin página
+- `/{slug}/book` — página pública de reserva, sin crear
+- Webhook de Stripe — sin endpoint
+- Generación de PDF — dependencia instalada, sin implementar
+- Envío de emails con Resend — sin implementar
+- Panel `/admin/*` — sin páginas
+- Onboarding de tenant — flujo pendiente
+- Tests (Vitest / Playwright) — configurados pero vacíos
+
+Cuando se trabaje en alguno de estos módulos, preguntar primero el plan de archivos antes de generar código.
+
+---
+
+## Diseño UI — Estética CateringFlow
+
+### Dirección visual
+**Cálido y premium**. Fondo oscuro (stone-950/stone-900), acentos en amber/dorado. Inspiración: carta de restaurante de alto nivel trasladada a interfaz web. Serio y profesional, pero con calidez. No frío, no genérico.
+
+> Nombre del producto: **Caterix**
+
+### Colores (CSS variables — definir en globals.css)
+```css
+--background: #0c0a09;        /* stone-950 */
+--surface: #1c1917;           /* stone-900 */
+--surface-raised: #292524;    /* stone-800 */
+--border: #44403c;            /* stone-700 */
+--border-subtle: #292524;     /* stone-800 */
+--text-primary: #fafaf9;      /* stone-50 */
+--text-secondary: #a8a29e;    /* stone-400 */
+--text-muted: #78716c;        /* stone-500 */
+--accent: #f59e0b;            /* amber-500 */
+--accent-hover: #d97706;      /* amber-600 */
+--accent-subtle: #451a03;     /* amber-950 */
+--success: #22c55e;
+--warning: #f59e0b;
+--error: #ef4444;
+```
+
+### Tipografía
+- **Display / headings**: `Cormorant Garamond` (Google Fonts) — elegante, editorial, con personalidad gastronómica
+- **Body / UI**: `DM Sans` — moderno, legible, neutral sin ser aburrido
+- Nunca usar: Inter, Roboto, Arial, system-ui como fuente principal
+
+### Componentes — reglas
+- Cards: `bg-[--surface]` con borde `border-[--border]` sutil. Sin sombras fuertes — usar bordes.
+- Botón primario: `bg-amber-500 text-stone-950 font-semibold hover:bg-amber-400` — texto oscuro sobre fondo dorado.
+- Botón secundario/ghost: `border border-[--border] text-[--text-secondary] hover:border-amber-500 hover:text-amber-500`
+- Inputs: `bg-[--surface-raised] border-[--border] text-[--text-primary] focus:border-amber-500 focus:ring-0`
+- Badges de estado:
+  - pendiente: `bg-stone-800 text-stone-300`
+  - confirmada: `bg-amber-950 text-amber-400`
+  - pagada: `bg-green-950 text-green-400`
+  - cancelada: `bg-red-950 text-red-400`
+- Sidebar: `bg-[--surface]` con separadores `border-[--border-subtle]`. Item activo: texto amber + barra lateral izquierda amber de 2px.
+
+### Espaciado y layout
+- Padding generoso en secciones: mínimo `p-6`, preferible `p-8`.
+- Headers de página con un separador sutil debajo (`border-b border-[--border]`).
+- Tablas: filas con `hover:bg-[--surface-raised]` suave, sin zebra striping.
+- Grids de cards: `gap-4` o `gap-6`, nunca `gap-2`.
+
+### Microdetalles que marcan la diferencia
+- Usar `tracking-wide` o `tracking-widest` en labels y badges en uppercase.
+- Números/importes en `font-mono` para alineación visual.
+- Iconos Lucide siempre con `strokeWidth={1.5}` — más elegante que el default.
+- Transiciones: `transition-colors duration-150` en todos los elementos interactivos.
+- Evitar `rounded-full` en botones — usar `rounded-md` o `rounded-lg` para look más editorial.
+
+### Lo que NO hacer nunca
+- Fondos blancos o grises claros (#f3f4f6, #ffffff) en el dashboard
+- Gradientes purple/blue/indigo
+- Sombras `shadow-lg` o `shadow-xl` exageradas
+- Componentes que parezcan sacados de una plantilla de admin genérica
+- Fuentes Inter o Roboto
+- Botones con `rounded-full` pill shape
+- Iconos con `strokeWidth={2}` (demasiado grueso)
